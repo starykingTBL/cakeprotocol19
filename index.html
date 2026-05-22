@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!--
+    viewport tag: makes the site look correct on phones.
+    Without this, mobile browsers zoom out and everything looks tiny.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Omosile</title>
+
+  <!--
+    Preconnect to Google Fonts server early.
+    This speeds up font loading by opening the connection before we ask for fonts.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!--
+    Our fonts:
+    - Cormorant Garamond: cinematic, luxury, emotional — for big moments
+    - DM Sans: clean and readable — for body text
+    - Italiana: dramatic single-word impact — for her name
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400&family=Italiana&display=swap" rel="stylesheet" />
+
+  <!--
+    Tailwind CSS via CDN.
+    No install needed. Just this one line gives us all Tailwind utility classes.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--
+    GSAP via CDN — our animation engine.
+    Handles smooth, cinematic transitions without heavy setup.
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!--
+    ScrollTrigger — GSAP plugin that fires animations as user scrolls.
+    We use this for the scene-by-scene reveals.
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Our custom styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!--
+    ============================================================
+    SCENE 1 — THE ARRIVAL
+    Full screen. Black. Her name appears alone.
+    The user scrolls to continue.
+    ============================================================
+  -->
+  <section id="scene-arrival" class="scene">
+
+    <!-- Grain overlay — adds cinematic film texture to the background -->
+    <div class="grain"></div>
+
+    <!-- Ambient glow — a soft rose gold light that pulses gently -->
+    <div class="ambient-glow"></div>
+
+    <!-- The main content, centered on screen -->
+    <div class="arrival-content">
+
+      <!--
+        Her name. This is the first thing she sees.
+        Italiana font. Cream color. Large. Alone on the screen.
+        It starts invisible (opacity 0) and fades in via GSAP.
+      -->
+      <h1 class="name-title" id="arrival-name">Omosile</h1>
+
+      <!--
+        The meaning. Appears after her name fades in.
+        Smaller. Italic. Emotionally weighted.
+      -->
+      <p class="name-meaning" id="arrival-meaning">
+        "The house was completed the day she arrived."
+      </p>
+
+      <!--
+        Scroll prompt — appears last.
+        Tells her to keep going.
+        The arrow pulses slowly to draw attention.
+      -->
+      <div class="scroll-prompt" id="scroll-prompt">
+        <span>scroll</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 2 — THE ALGORITHM
+    "He wasn't supposed to be on Snapchat that day."
+    ============================================================
+  -->
+  <section id="scene-algorithm" class="scene scene-dark">
+
+    <div class="grain"></div>
+
+    <div class="scene-content">
+
+      <!-- Small label above — like a chapter title -->
+      <span class="scene-label">Chapter I</span>
+
+      <h2 class="scene-heading">He wasn't even supposed<br/>to be on Snapchat that day.</h2>
+
+      <div class="scene-divider"></div>
+
+      <p class="scene-body">
+        A random recommendation.<br/>
+        A profile that just said <em>"Me😌❤️"</em><br/>
+        like that was enough of a reason.
+      </p>
+
+      <p class="scene-body scene-body-delay">
+        It was.
+      </p>
+
+      <!-- First star the player can collect -->
+      <div class="star-collectible" data-star="1" data-memory="He added a stranger. You accepted.">
+        <div class="star-inner">✦</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 3 — THE HORROR
+    Where it all started. Two horror fans. One story.
+    ============================================================
+  -->
+  <section id="scene-horror" class="scene scene-horror-bg">
+
+    <div class="grain"></div>
+
+    <!-- Flickering light effect overlay -->
+    <div class="flicker-overlay"></div>
+
+    <div class="scene-content">
+
+      <span class="scene-label">Chapter II</span>
+
+      <h2 class="scene-heading">She posted a horror video.</h2>
+
+      <div class="scene-divider"></div>
+
+      <p class="scene-body">
+        He had just finished watching one.
+      </p>
+
+      <p class="scene-body scene-body-delay">
+        He said something.<br/>
+        He doesn't remember what.<br/>
+        But he remembers the energy.
+      </p>
+
+      <p class="scene-body scene-body-delay-2">
+        <em>"This person is different."</em>
+      </p>
+
+      <!-- Second collectible star -->
+      <div class="star-collectible" data-star="2" data-memory="Two horror fans. One story post. Everything changed.">
+        <div class="star-inner">✦</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 4 — THE CALL
+    "According to her, it was a mistake."
+    ============================================================
+  -->
+  <section id="scene-call" class="scene scene-dark">
+
+    <div class="grain"></div>
+    <div class="ambient-glow glow-warm"></div>
+
+    <div class="scene-content">
+
+      <span class="scene-label">Chapter III</span>
+
+      <h2 class="scene-heading">Then you called.</h2>
+
+      <div class="scene-divider"></div>
+
+      <p class="scene-body">
+        You said it was a mistake.
+      </p>
+
+      <!--
+        This line gets special treatment — wine red color, larger font.
+        The emotional pivot of the whole story.
+      -->
+      <p class="scene-highlight">
+        Okomi — that was the best mistake you've ever made.
+      </p>
+
+      <!-- Third collectible star -->
+      <div class="star-collectible" data-star="3" data-memory="The accidental call that started everything.">
+        <div class="star-inner">✦</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 5 — OKOMI & IYAWOMI (Inside Jokes)
+    Playful section. Warm shift in tone.
+    ============================================================
+  -->
+  <section id="scene-jokes" class="scene scene-warm">
+
+    <div class="grain"></div>
+
+    <div class="scene-content">
+
+      <span class="scene-label">Chapter IV</span>
+
+      <h2 class="scene-heading">Things only they understand.</h2>
+
+      <div class="scene-divider"></div>
+
+      <!-- Contact cards — how they saved each other's numbers -->
+      <div class="contact-cards">
+
+        <div class="contact-card" id="card-his">
+          <div class="contact-label">She saved him as</div>
+          <div class="contact-name">Iyawomi 🤍</div>
+        </div>
+
+        <div class="contact-card" id="card-hers">
+          <div class="contact-label">He saved her as</div>
+          <div class="contact-name">Okomi 🤍</div>
+        </div>
+
+      </div>
+
+      <!-- The fish joke — tap to reveal -->
+      <div class="joke-reveal" id="fish-joke">
+        <div class="joke-prompt">tap me 👀</div>
+        <div class="joke-hidden">you be fish 🐟</div>
+      </div>
+
+      <!-- Stars 4 and 5 -->
+      <div class="star-collectible" data-star="4" data-memory="Iyawomi. Okomi. Names that mean everything.">
+        <div class="star-inner">✦</div>
+      </div>
+      <div class="star-collectible" data-star="5" data-memory="You be fish. He started it. Obviously.">
+        <div class="star-inner">✦</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    MINI GAME — FIND HER STARS
+    Dark screen. 7 stars hidden. She taps to find them.
+    ============================================================
+  -->
+  <section id="scene-game" class="scene scene-game">
+
+    <div class="grain"></div>
+
+    <!-- Game instruction — always visible at top -->
+    <div class="game-instructions">
+      <p class="game-hint">7 stars are hidden in the dark.</p>
+      <p class="game-hint-sub">Tap around to find them.<br/>Some moments are worth searching for.</p>
+      <!-- Counter showing how many found -->
+      <p class="game-counter"><span id="stars-found">0</span> / 7 found</p>
+    </div>
+
+    <!--
+      The game field — full dark area where stars are hidden.
+      Stars are placed via JavaScript at random but safe positions.
+    -->
+    <div class="game-field" id="game-field">
+      <!-- Stars are injected here by script.js -->
+    </div>
+
+    <!--
+      Memory flash — appears briefly when a star is found.
+      Shows the memory text from data-memory attribute.
+    -->
+    <div class="memory-flash" id="memory-flash">
+      <p id="memory-text"></p>
+    </div>
+
+    <!--
+      Game completion overlay — appears when all 7 are found.
+      Stars animate to center before gallery unlocks.
+    -->
+    <div class="game-complete" id="game-complete">
+      <p class="complete-text">You found them all.</p>
+      <p class="complete-sub">Now see how he sees you.</p>
+      <button class="continue-btn" id="continue-to-gallery">Continue ↓</button>
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 6 — THE GALLERY
+    Her photos. Cinematic reveal.
+    ============================================================
+  -->
+  <section id="scene-gallery" class="scene scene-gallery">
+
+    <div class="grain"></div>
+    <div class="ambient-glow glow-gold"></div>
+
+    <div class="scene-content">
+
+      <span class="scene-label">Chapter V</span>
+      <h2 class="scene-heading">As he sees her.</h2>
+      <div class="scene-divider"></div>
+
+      <!--
+        Gallery grid.
+        Each photo is wrapped in a frame with rose gold border.
+        Photos fade in one by one on scroll.
+        Replace src values with real photo paths later.
+      -->
+      <div class="gallery-grid" id="gallery-grid">
+
+        <div class="gallery-frame" data-index="0">
+          <img src="assets/images/photo1.jpg" alt="Omosile" loading="lazy" />
+        </div>
+
+        <div class="gallery-frame" data-index="1">
+          <img src="assets/images/photo2.jpg" alt="Omosile" loading="lazy" />
+        </div>
+
+        <div class="gallery-frame" data-index="2">
+          <img src="assets/images/photo3.jpg" alt="Omosile" loading="lazy" />
+        </div>
+
+        <div class="gallery-frame" data-index="3">
+          <img src="assets/images/photo4.jpg" alt="Omosile" loading="lazy" />
+        </div>
+
+        <div class="gallery-frame" data-index="4">
+          <img src="assets/images/photo5.jpg" alt="Omosile" loading="lazy" />
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 7 — THE CONFESSION
+    The whole point. Line by line. Silence before it starts.
+    ============================================================
+  -->
+  <section id="scene-confession" class="scene scene-confession">
+
+    <div class="grain"></div>
+    <div class="ambient-glow glow-red"></div>
+
+    <div class="confession-content" id="confession-content">
+
+      <!--
+        Each paragraph is its own element with a class of confession-line.
+        They start invisible and reveal one by one as she scrolls.
+        The delay increases with each line for dramatic pacing.
+      -->
+
+      <p class="confession-line" data-delay="0">
+        I wasn't even supposed to be on Snapchat that day.
+      </p>
+
+      <p class="confession-line" data-delay="0.3">
+        I don't know what made me open the app. I don't know what made me stop at your profile. I don't know what made me add someone I didn't know, in a country I've never been to, with a name that just said <em>"Me😌❤️"</em> like that was enough of a reason.
+      </p>
+
+      <p class="confession-line confession-em" data-delay="0.6">
+        But it was.
+      </p>
+
+      <p class="confession-line" data-delay="0.9">
+        You posted a horror video on your story.<br/>
+        I had just finished watching one.<br/>
+        I said something — I don't even remember what.<br/>
+        But I remember the energy.<br/>
+        I remember thinking <em>"this person is different."</em>
+      </p>
+
+      <p class="confession-line" data-delay="1.2">
+        Then you called.
+      </p>
+
+      <p class="confession-line" data-delay="1.5">
+        You said it was a mistake.
+      </p>
+
+      <p class="confession-line confession-highlight" data-delay="1.8">
+        Okomi — that was the best mistake you've ever made.
+      </p>
+
+      <p class="confession-line" data-delay="2.1">
+        We talked about horror.<br/>
+        Then books.<br/>
+        Then life.<br/>
+        Then everything.<br/>
+        Then nothing — just talking because stopping felt wrong.
+      </p>
+
+      <p class="confession-line" data-delay="2.4">
+        I've called you okomi.<br/>
+        You've called me Iyawomi.<br/>
+        I don't know when this became the realest thing in my life but it did.
+      </p>
+
+      <p class="confession-line" data-delay="2.7">
+        Your father named you Omosile because you completed the house when you arrived.
+      </p>
+
+      <p class="confession-line confession-em" data-delay="3.0">
+        I believe that.
+      </p>
+
+      <p class="confession-line" data-delay="3.3">
+        Because ever since you arrived in my world —<br/>
+        something in me that I didn't know was unfinished<br/>
+        finally felt complete.
+      </p>
+
+      <p class="confession-line" data-delay="3.6">
+        I'm not good at grand gestures.<br/>
+        I'm not good at perfect timing.<br/>
+        But I built this.<br/>
+        Every scene. Every word. Every star you collected.<br/>
+        All of it was just me trying to say one thing<br/>
+        that I keep almost saying and never do.
+      </p>
+
+      <!-- The name — alone. Maximum weight. -->
+      <p class="confession-name" data-delay="4.0">
+        OMOSILE —
+      </p>
+
+      <!-- The declaration -->
+      <p class="confession-declaration" data-delay="4.5">
+        I love you.
+      </p>
+
+      <p class="confession-line" data-delay="5.0">
+        Not the casual kind.<br/>
+        The kind that made me build a whole website<br/>
+        on a phone<br/>
+        just so the moment I said it<br/>
+        would feel as big as it actually is.
+      </p>
+
+      <!-- The question -->
+      <p class="confession-question" data-delay="5.5">
+        So.
+      </p>
+
+      <p class="confession-question confession-ask" data-delay="6.0">
+        Will you be my person?<br/>Officially. For real.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!--
+    ============================================================
+    SCENE 8 — THE ENDING
+    Stars converge. Constellation forms. Signature appears.
+    ============================================================
+  -->
+  <section id="scene-ending" class="scene scene-ending">
+
+    <div class="grain"></div>
+
+    <!-- Canvas where the star constellation animates -->
+    <canvas id="constellation-canvas"></canvas>
+
+    <div class="ending-content" id="ending-content">
+
+      <!-- Appears after constellation fully forms -->
+      <p class="ending-text" id="ending-tagline">
+        *(The stars were always pointing here.)*
+      </p>
+
+      <!-- The signature -->
+      <p class="ending-signature" id="ending-signature">
+        — starykingTBL
+      </p>
+
+      <!-- Footer copyright line -->
+      <p class="ending-copyright" id="ending-copyright">
+        © starykingTBL — made this. for her.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- Our custom JavaScript — loaded at end so HTML is ready first -->
+  <script src="script.js"></script>
+
+</body>
+</html>

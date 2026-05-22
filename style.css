@@ -1,0 +1,755 @@
+/* ============================================================
+   OMOSILE — STYLESHEET
+   Cinematic luxury. Emotional. Clean.
+   ============================================================ */
+
+
+/* --- CSS VARIABLES ---
+   One place to control all colors and fonts.
+   Change a value here and it updates everywhere. */
+:root {
+  --black:      #0a0a0a;   /* near black — main background */
+  --surface:    #111111;   /* dark charcoal — card backgrounds */
+  --wine:       #8B1A1A;   /* deep wine red — accents and highlights */
+  --gold:       #C9A87C;   /* rose gold — warm glow and borders */
+  --cream:      #F5ECD7;   /* soft cream — main text color */
+  --purple:     #6B4C7A;   /* muted purple — subtle secondary glow */
+  --font-title: 'Italiana', serif;          /* dramatic titles */
+  --font-main:  'Cormorant Garamond', serif; /* cinematic body */
+  --font-clean: 'DM Sans', sans-serif;      /* clean readable text */
+}
+
+
+/* --- RESET ---
+   Removes default browser spacing so we control everything. */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* --- BODY ---
+   Sets the base background, text color, and font.
+   overflow-x hidden prevents horizontal scroll on mobile. */
+body {
+  background-color: var(--black);
+  color: var(--cream);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+
+/* --- SCENE ---
+   Every section of the site uses this base class.
+   min-height: 100vh means each scene fills the full screen height.
+   position: relative allows absolutely positioned children inside. */
+.scene {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+}
+
+
+/* --- GRAIN TEXTURE OVERLAY ---
+   Creates cinematic film grain on every scene.
+   pointer-events: none means it doesn't block clicks. */
+.grain {
+  position: absolute;
+  inset: 0;                          /* covers the whole parent */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+
+/* --- AMBIENT GLOW ---
+   Soft glowing orb in the background.
+   Creates depth and warmth without being distracting. */
+.ambient-glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  filter: blur(100px);             /* makes it a soft cloud of color */
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--gold);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: glowPulse 6s ease-in-out infinite; /* gentle breathing pulse */
+}
+
+/* Warm version — more orange gold */
+.glow-warm { background: #D4956A; opacity: 0.10; }
+
+/* Gold version — rose gold */
+.glow-gold { background: var(--gold); opacity: 0.15; }
+
+/* Red version — for confession scene */
+.glow-red  { background: var(--wine); opacity: 0.12; }
+
+/* The glow breathing animation */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.12; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.18; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+
+/* ============================================================
+   SCENE 1 — ARRIVAL
+   ============================================================ */
+
+.arrival-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Her name — the first thing she sees.
+   Starts hidden. GSAP fades it in. */
+.name-title {
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 18vw, 10rem); /* clamp: scales between mobile and desktop */
+  color: var(--cream);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  opacity: 0;                          /* starts invisible — GSAP animates this */
+  transform: translateY(20px);         /* starts slightly low — GSAP moves up */
+}
+
+/* The meaning beneath her name */
+.name-meaning {
+  font-family: var(--font-main);
+  font-style: italic;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  opacity: 0;                          /* starts hidden — GSAP reveals */
+}
+
+/* Scroll prompt */
+.scroll-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;                          /* starts hidden */
+  margin-top: 2rem;
+}
+
+.scroll-prompt span {
+  font-family: var(--font-clean);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.4;
+}
+
+/* The bouncing arrow */
+.scroll-arrow {
+  font-size: 1.2rem;
+  color: var(--gold);
+  opacity: 0.6;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+
+/* ============================================================
+   SCENE CONTENT — shared layout for story scenes
+   ============================================================ */
+
+.scene-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Chapter label — small text above heading */
+.scene-label {
+  font-family: var(--font-clean);
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+/* Section heading */
+.scene-heading {
+  font-family: var(--font-main);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--cream);
+}
+
+/* Thin divider line */
+.scene-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+/* Body text */
+.scene-body {
+  font-family: var(--font-main);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--cream);
+  opacity: 0.8;
+}
+
+/* Delayed body text variants for staggered reveals */
+.scene-body-delay  { animation-delay: 0.3s; }
+.scene-body-delay-2 { animation-delay: 0.6s; }
+
+/* Highlighted line — wine red, larger */
+.scene-highlight {
+  font-family: var(--font-main);
+  font-style: italic;
+  font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+  color: var(--wine);
+  line-height: 1.5;
+}
+
+/* Dark background variant */
+.scene-dark { background-color: var(--black); }
+
+/* Warm background variant — very slightly lighter for warmth */
+.scene-warm { background-color: #0d0b09; }
+
+/* Horror scene — slightly cooler dark */
+.scene-horror-bg { background-color: #080b0e; }
+
+
+/* --- FLICKER OVERLAY ---
+   Simulates a TV/projector flicker on the horror scene.
+   Subtle. Not annoying. */
+.flicker-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.01);
+  pointer-events: none;
+  z-index: 1;
+  animation: flicker 8s infinite;
+}
+
+@keyframes flicker {
+  0%,100%  { opacity: 0; }
+  92%      { opacity: 0; }
+  93%      { opacity: 0.03; }
+  94%      { opacity: 0; }
+  96%      { opacity: 0.02; }
+  97%      { opacity: 0; }
+}
+
+
+/* ============================================================
+   STAR COLLECTIBLES — scattered in story scenes
+   ============================================================ */
+
+.star-collectible {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.star-inner {
+  font-size: 1.2rem;
+  color: var(--gold);
+  opacity: 0.3;                        /* dim — she has to notice it */
+  transition: opacity 0.3s, transform 0.3s;
+  animation: starPulse 3s ease-in-out infinite;
+}
+
+/* When collected, it glows and scales up briefly */
+.star-collectible.collected .star-inner {
+  opacity: 1;
+  color: var(--gold);
+  transform: scale(1.5);
+}
+
+@keyframes starPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.6; }
+}
+
+
+/* ============================================================
+   SCENE 5 — CONTACT CARDS
+   ============================================================ */
+
+.contact-cards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid rgba(201, 168, 124, 0.15); /* very subtle gold border */
+  border-radius: 12px;
+  padding: 1.2rem 2rem;
+  text-align: center;
+  min-width: 140px;
+}
+
+.contact-label {
+  font-family: var(--font-clean);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.contact-name {
+  font-family: var(--font-main);
+  font-size: 1.3rem;
+  color: var(--cream);
+}
+
+/* Fish joke tap element */
+.joke-reveal {
+  margin-top: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.joke-prompt {
+  font-family: var(--font-clean);
+  font-size: 0.8rem;
+  color: var(--gold);
+  opacity: 0.5;
+  letter-spacing: 0.2em;
+  transition: opacity 0.3s;
+}
+
+.joke-hidden {
+  font-family: var(--font-main);
+  font-size: 1.4rem;
+  color: var(--cream);
+  opacity: 0;                          /* hidden until tapped */
+  transition: opacity 0.5s;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+/* When revealed, prompt fades out, joke fades in */
+.joke-reveal.revealed .joke-prompt { opacity: 0; }
+.joke-reveal.revealed .joke-hidden  { opacity: 1; position: static; transform: none; }
+
+
+/* ============================================================
+   MINI GAME
+   ============================================================ */
+
+.scene-game {
+  background: #050507;                 /* darkest scene — game needs darkness */
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 3rem;
+  min-height: 100vh;
+}
+
+.game-instructions {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-hint {
+  font-family: var(--font-main);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  color: var(--cream);
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+.game-hint-sub {
+  font-family: var(--font-clean);
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.game-counter {
+  font-family: var(--font-clean);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+/* The tappable game field */
+.game-field {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 500px;
+  height: 55vh;
+  margin: 0 auto;
+}
+
+/* Each hidden star in the game */
+.game-star {
+  position: absolute;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--cream);
+  opacity: 0.06;                       /* almost invisible — she has to search */
+  transition: all 0.4s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; /* removes blue flash on mobile tap */
+}
+
+/* First star pulses slightly to teach the mechanic */
+.game-star.hint-star {
+  animation: hintPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.06; }
+  50%       { opacity: 0.18; }
+}
+
+/* When a star is found — glows gold */
+.game-star.found {
+  color: var(--gold);
+  opacity: 1 !important;
+  animation: starFound 0.6s ease forwards;
+  cursor: default;
+}
+
+@keyframes starFound {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(2.2); }
+  100% { transform: scale(1.4); }
+}
+
+/* Memory flash — the text that appears when a star is found */
+.memory-flash {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,10,10,0.9);
+  border: 1px solid rgba(201,168,124,0.2);
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  z-index: 100;
+  opacity: 0;                          /* hidden until a star is found */
+  transition: opacity 0.4s;
+  max-width: 85vw;
+  text-align: center;
+}
+
+.memory-flash.visible { opacity: 1; }
+
+#memory-text {
+  font-family: var(--font-main);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gold);
+}
+
+/* Game complete overlay */
+.game-complete {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,7,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 0;                          /* hidden until game won */
+  pointer-events: none;
+  transition: opacity 1s ease;
+  gap: 1rem;
+}
+
+.game-complete.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.complete-text {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  color: var(--cream);
+}
+
+.complete-sub {
+  font-family: var(--font-main);
+  font-style: italic;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.continue-btn {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid rgba(201,168,124,0.3);
+  color: var(--gold);
+  font-family: var(--font-clean);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.continue-btn:hover,
+.continue-btn:active {
+  background: rgba(201,168,124,0.08);
+  border-color: var(--gold);
+}
+
+
+/* ============================================================
+   SCENE 6 — GALLERY
+   ============================================================ */
+
+.scene-gallery {
+  background: var(--black);
+  align-items: flex-start;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+/* First photo spans both columns — hero image */
+.gallery-frame:first-child {
+  grid-column: 1 / -1;
+}
+
+.gallery-frame {
+  border: 1px solid rgba(201,168,124,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;                          /* starts hidden — GSAP reveals on scroll */
+  position: relative;
+}
+
+.gallery-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.gallery-frame:hover img,
+.gallery-frame:active img {
+  transform: scale(1.03);
+}
+
+
+/* ============================================================
+   SCENE 7 — CONFESSION
+   ============================================================ */
+
+.scene-confession {
+  background: var(--black);
+  align-items: flex-start;
+  padding: 6rem 1.5rem 8rem;
+}
+
+.confession-content {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Each line starts hidden — GSAP reveals on scroll */
+.confession-line {
+  font-family: var(--font-main);
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--cream);
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* Italic emphasis lines */
+.confession-em {
+  font-style: italic;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  color: var(--gold);
+}
+
+/* Wine red highlight */
+.confession-highlight {
+  color: var(--wine);
+  font-style: italic;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+}
+
+/* Her name — maximum impact */
+.confession-name {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  color: var(--cream);
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transform: translateY(16px);
+  margin-top: 2rem;
+}
+
+/* "I love you" */
+.confession-declaration {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 8vw, 4rem);
+  color: var(--gold);
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* The question */
+.confession-question {
+  font-family: var(--font-main);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  color: var(--cream);
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* "Will you be my person" */
+.confession-ask {
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 6vw, 2.5rem);
+  color: var(--cream);
+  line-height: 1.4;
+}
+
+
+/* ============================================================
+   SCENE 8 — ENDING
+   ============================================================ */
+
+.scene-ending {
+  background: var(--black);
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Canvas fills the whole ending scene */
+#constellation-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.ending-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  opacity: 0;                          /* fades in after constellation */
+}
+
+.ending-text {
+  font-family: var(--font-main);
+  font-style: italic;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.ending-signature {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: var(--cream);
+}
+
+.ending-copyright {
+  font-family: var(--font-clean);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+  opacity: 0.25;
+  margin-top: 1rem;
+}
+
+
+/* ============================================================
+   RESPONSIVE — tablet and desktop upgrades
+   ============================================================ */
+
+/* On larger screens, give scenes more breathing room */
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-frame:first-child {
+    grid-column: 1 / 3;
+  }
+
+  .contact-cards {
+    gap: 2rem;
+  }
+}
