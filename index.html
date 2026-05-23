@@ -12,7 +12,6 @@
 </head>
 <body>
 
-  <!-- GLOBAL NAV — floats above all stages -->
   <div id="global-nav">
     <button class="nav-btn" id="btn-back">&#8592;</button>
     <div id="nav-center">
@@ -24,7 +23,7 @@
 
   <div id="app">
 
-    <!-- ══ STAGE 0: THE GATE ══ -->
+    <!-- STAGE 0: GATE -->
     <div class="stage" id="s0">
       <canvas id="particle-canvas"></canvas>
       <div class="gate-content">
@@ -34,7 +33,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 1: THE ORIGIN ══ -->
+    <!-- STAGE 1: ORIGIN -->
     <div class="stage" id="s1">
       <div class="stage-wrap">
         <span class="ch-label">Chapter I</span>
@@ -52,7 +51,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 2: THE CALL ══ -->
+    <!-- STAGE 2: THE CALL -->
     <div class="stage" id="s2">
       <div class="stage-wrap">
         <span class="ch-label">Chapter II</span>
@@ -72,7 +71,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 3: BLOCK BREAKER ══ -->
+    <!-- STAGE 3: BLOCK BREAKER -->
     <div class="stage stage-game" id="s3">
       <div class="game-top">
         <span class="ch-label">Chapter III</span>
@@ -84,19 +83,23 @@
         <canvas id="breaker-canvas"></canvas>
       </div>
       <p class="drag-hint">drag to move the paddle</p>
+
+      <!-- Lose overlay -->
       <div class="game-overlay" id="breaker-lose">
         <p class="overlay-title">Almost.</p>
         <p class="overlay-sub">Don't give up on me now.</p>
         <button class="btn-overlay" id="breaker-retry">Try Again</button>
       </div>
-      <div class="game-overlay" id="breaker-win">
-        <p class="win-reveal">Jesus of Nazareth knows.<br>I love you.<br>I choose you.</p>
-        <p class="win-sub">"You just broke through everything to get here.<br>That's kind of what you did to me too."</p>
-        <button class="btn-overlay gold-btn" id="breaker-next">Continue →</button>
+
+      <!-- Cinematic win overlay — JS fills this -->
+      <div class="breaker-cinema" id="breaker-cinema">
+        <div class="cinema-glow"></div>
+        <div class="cinema-lines" id="cinema-lines"></div>
+        <button class="cinema-continue" id="cinema-continue">Continue →</button>
       </div>
     </div>
 
-    <!-- ══ STAGE 4: OKOMI & IYAWOMI ══ -->
+    <!-- STAGE 4: OKOMI & IYAWOMI -->
     <div class="stage" id="s4">
       <div class="stage-wrap">
         <span class="ch-label">Chapter IV</span>
@@ -119,21 +122,22 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 5: STAR HUNT ══ -->
+    <!-- STAGE 5: STAR HUNT (19 dots) -->
     <div class="stage stage-dark" id="s5">
       <div class="star-header">
         <span class="ch-label">Chapter V</span>
         <h2 class="stage-h">Find Her Stars</h2>
-        <p class="game-hint-text">7 stars are hidden in the dark.<br>Tap around to find them.<br>Some moments are worth searching for.</p>
-        <p class="star-count">⭐ <span id="star-count">0</span> / 7</p>
+        <p class="game-hint-text">19 stars hidden in the dark.<br>Tap to find them. Tap again to re-read.<br>Some moments are worth searching for.</p>
+        <p class="star-count">✦ <span id="star-count">0</span> / 19</p>
       </div>
       <canvas id="star-canvas"></canvas>
       <div class="mem-flash" id="mem-flash">
         <p id="mem-text"></p>
+        <span class="mem-close">tap to close</span>
       </div>
     </div>
 
-    <!-- ══ STAGE 6: MEMORY MATCH ══ -->
+    <!-- STAGE 6: MEMORY MATCH -->
     <div class="stage" id="s6">
       <div class="stage-wrap match-wrap">
         <span class="ch-label">Chapter VI</span>
@@ -147,7 +151,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 7: GALLERY ══ -->
+    <!-- STAGE 7: GALLERY -->
     <div class="stage" id="s7">
       <span class="ch-label gallery-ch">Chapter VII</span>
       <h2 class="stage-h gallery-h">As He Sees Her</h2>
@@ -164,7 +168,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 8: THE CONFESSION ══ -->
+    <!-- STAGE 8: CONFESSION -->
     <div class="stage stage-confession" id="s8">
       <div class="confession-page" id="confession-page"></div>
       <div class="confession-nav">
@@ -174,7 +178,7 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 9: THE ASK ══ -->
+    <!-- STAGE 9: THE ASK -->
     <div class="stage" id="s9">
       <div class="ask-wrap">
         <span class="ch-label">Chapter IX</span>
@@ -188,17 +192,19 @@
       </div>
     </div>
 
-    <!-- ══ STAGE 10: THE ENDING ══ -->
+    <!-- STAGE 10: BIRTHDAY ENDING -->
     <div class="stage stage-end" id="s10">
       <canvas id="fireworks-canvas"></canvas>
       <div class="end-content" id="end-content">
+        <p class="end-bday-label">Happy 19th Birthday</p>
         <h1 class="end-name">Omosile</h1>
         <p class="end-tagline">*(The stars were always pointing here.)*</p>
+        <p class="end-bday-msg">May everything you are<br>be celebrated today — and every day after.</p>
         <p class="end-copy">© starykingTBL</p>
       </div>
     </div>
 
-  </div><!-- #app -->
+  </div>
 
   <script src="script.js"></script>
 </body>
