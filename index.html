@@ -2,130 +2,418 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>For Omosile</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#020817">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
+  <title>Happy 19th, Omosile 🤍</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap"
+        rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <canvas id="aurora-bg"></canvas>
-  <canvas id="fireworks-bg"></canvas>
-  <div id="floaties"></div>
-
-  <div class="phase" id="ph-opening">
-    <p id="hey-word">hey</p>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
-  <div class="phase" id="ph-story">
-    <div id="story-veil"></div>
-    <div id="story-mask">
-      <div id="story-text">
-        <p class="st-gap"></p>
-        <p class="st-para">Once upon a time, a young lad was minding his business on Snapchat.</p>
-        <p class="st-para">Not looking for anyone.<br>Not expecting anything.<br>Just&hellip; there.</p>
-        <p class="st-para">Then the algorithm &mdash; being the sneaky little matchmaker it is &mdash; decided to slide a profile his way. No drumroll. No big intro. Just a name and a vibe that said <em>&ldquo;Me&#x1F60C;&#x2764;&#xFE0F;&rdquo;</em> &mdash; like that was reason enough.</p>
-        <p class="st-para">He looked at it. He thought about it. He added her.</p>
-        <p class="st-para">She was somewhere in the UK. He was wherever he was. Two different worlds. Same timeline. Same app. Same moment.</p>
-        <p class="st-para">She accepted.<br>He played it cool and didn&rsquo;t text that day.<br><em>Very classic of him.</em></p>
-        <p class="st-divider">&#10022;</p>
-        <p class="st-para">But then.</p>
-        <p class="st-para">She posted a horror video on her story.</p>
-        <p class="st-para">He had literally just finished watching one.</p>
-        <p class="st-para">Something about that felt less like coincidence and more like a setup. So he slid into her DMs. He doesn&rsquo;t remember exactly what he said &mdash; but the energy? That, he remembers. Like two people who&rsquo;d somehow known each other longer than they actually had.</p>
-        <p class="st-para">They talked about horror. Then books. Then life &mdash; the real kind. The kind of conversation that sneaks up on you, and suddenly it&rsquo;s 3am and neither of you wants to stop.</p>
-        <p class="st-divider">&#10022;</p>
-        <p class="st-para">Then came the call.</p>
-        <p class="st-para">She says it was a mistake &mdash; she called by accident.<br>He picked up anyway.<br>And what was supposed to be a two-second <em>&ldquo;oops&rdquo;</em> turned into something that changed everything.</p>
-        <p class="st-para">He saved her as <strong>Okomi &#x1F90D;</strong><br>She saved him as <strong>Iyawomi &#x1F90D;</strong></p>
-        <p class="st-divider">&#10022;</p>
-        <p class="st-para">And somewhere between the inside jokes, the late-night calls, the <em>&ldquo;you be fish&rdquo;</em> moments (he started it, by the way), and the conversations that hit different when they come from the right person &mdash;</p>
-        <p class="st-para">Something real happened.</p>
-        <p class="st-para">He stopped just passing time.<br>She stopped just talking to someone.</p>
-        <p class="st-para">And without either of them planning it, without a script or a perfect moment &mdash;</p>
-        <p class="st-final">They became each other&rsquo;s favourite part of the day.</p>
-        <p class="st-gap"></p>
-        <p class="st-gap"></p>
+  <!-- ═══════════════ SCREEN 1: LANDING ═══════════════ -->
+  <section class="screen active" id="screen-landing">
+    <div class="landing-wrap">
+      <div class="landing-sparkles" id="landing-sparkles"></div>
+      <div class="landing-badge">
+        <span class="badge-dot"></span>
+        <span>A gift. Just for you.</span>
       </div>
+      <h1 class="landing-name">Omosile<span class="name-heart">🤍</span></h1>
+      <p class="landing-age">Turning <em>nineteen</em></p>
+
+      <div class="landing-card">
+        <p class="lc-title">Nineteen looks good on you. 🎂</p>
+        <p class="lc-body">Not just today — always. You carry yourself like someone who actually knows her worth. That is not a small thing and I need you to hear it.</p>
+        <p class="lc-body">I made you something. Take your time with it.</p>
+        <p class="lc-sig">— Ife 🖤</p>
+      </div>
+
+      <button class="btn-glow" id="btn-open" type="button">
+        Open Your Gift 🎁
+      </button>
+      <p class="watermark">© starykingTBL 2026</p>
     </div>
-  </div>
+  </section>
 
-  <div class="phase" id="ph-reveal">
-    <p id="reveal-line">
-      &hellip;and that&rsquo;s our love story.
-      <span>That&rsquo;s how he found the most beautiful girl in his world.</span>
-    </p>
-  </div>
-
-  <div class="phase" id="ph-birthday">
-    <div id="bday-scroll">
-      <div id="bday-content">
-        <p class="bday-top-label">Happy 19th Birthday</p>
-        <p class="bday-name">Omosile &#x1F382;</p>
-        <div class="bday-line"></div>
-        <p class="bday-para">June 10, 2007.</p>
-        <p class="bday-para">Somewhere in a hospital, your mum was calling your dad &mdash; <em>&ldquo;Otinbo!! Yee!!&rdquo;</em> &#x1F923; And I can only imagine the chaos. Emmy and Aunty Mary somewhere in that building, fully losing their minds. Your dad pacing those corridors like a man on a mission &mdash; quietly making Jesus his personal best friend that day.</p>
-        <p class="bday-para">Then it happened.</p>
-        <p class="bday-cry">Kewn. Kewn. Kewn. &#x1F923;</p>
-        <p class="bday-para">The sound nobody in that room was ready for, but everybody needed.</p>
-        <p class="bday-para">They cleaned you up. You rested. You slept &mdash; honestly, very on-brand for you. And then a week later, they looked at this tiny little person and said: <em>&ldquo;Mother of all Nations.&rdquo;</em> I&rsquo;m almost certain that was your mum&rsquo;s idea.</p>
-        <p class="bday-para">And then came <strong>Omosile</strong>.</p>
-        <p class="bday-para">The name I love most. Because you really did open something in me &mdash; but that&rsquo;s a conversation for another day.</p>
-        <div class="bday-line"></div>
-        <p class="bday-big">Happy Birthday, baby girl.</p>
-        <p class="bday-para">Enjoy every single second of today.<br>You deserve it more than you know.<br>You deserve all of it &mdash; the love, the joy,<br>the big moments and the quiet ones.</p>
-        <div class="bday-line"></div>
-        <p class="bday-love">I love you so much, Omosile.</p>
-        <p class="bday-para">And I hope that one day &mdash; when the time is right and the stars align &mdash; it&rsquo;s you I get to call mine. Forever.</p>
-        <p class="bday-sig">&copy; starykingTBL</p>
-        <button id="btn-party" class="party-btn">Open Your Gift &#x1F381;</button>
-      </div>
+  <!-- ═══════════════ SCREEN 2: LOVE LETTER ═══════════════ -->
+  <section class="screen hidden" id="screen-letter">
+    <div class="story-wrap">
+      <div class="story-body" id="letter-body"></div>
+      <button class="btn-glow btn-continue" id="btn-letter-next"
+              type="button">Continue 🤍</button>
     </div>
-  </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
 
-  <div class="phase" id="ph-menu">
-    <div id="menu-wrap">
-      <div id="timer-bar">
-        <span>&#x1F389; Party ends in&nbsp;</span>
-        <span id="timer-display">24:00:00</span>
+  <!-- ═══════════════ SCREEN 3: GRAND FINALE ═══════════════ -->
+  <section class="screen hidden" id="screen-finale">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="finale-wrap">
+      <div class="finale-emoji-row" id="finale-emojis">
+        🎂✨💙🎉🌸🎈🥳
       </div>
-      <div id="menu-tabs">
-        <button class="m-tab active" data-tab="arcade">&#x1F3AE; Arcade</button>
-        <button class="m-tab" data-tab="gallery">&#x1F4F8; Gallery</button>
-        <button class="m-tab" data-tab="story">&#x1F48C; Story</button>
+      <h1 class="finale-hbd">Happy 19th Birthday</h1>
+      <h2 class="finale-name"><em>Omosile</em> 🤍</h2>
+      <p class="finale-sub">
+        Nineteen looks good on you.<br>It was always going to.
+      </p>
+      <button class="btn-scroll-down" id="btn-to-writeup" type="button">
+        <span>There's more</span>
+        <span class="arrow-down">↓</span>
+      </button>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ SCREEN 4: WRITE-UP ═══════════════ -->
+  <!-- user-select enabled on this screen so text is copyable -->
+  <section class="screen hidden screen-writeup" id="screen-writeup">
+    <div class="writeup-wrap">
+      <div class="writeup-content" id="writeup-content"></div>
+      <div class="writeup-divider"></div>
+      <button class="btn-glow" id="btn-enter-arcade" type="button">
+        Enter Your Arcade 🎮
+      </button>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ SCREEN 5: HUB ═══════════════ -->
+  <section class="screen hidden" id="screen-hub">
+    <header class="hub-header">
+      <span class="hub-greeting">Okomi's World 🌸</span>
+      <div class="hub-keys-badge">
+        <span>🗝</span><span id="hub-keys">0</span>
       </div>
-      <div class="m-content active" id="tab-arcade">
-        <div id="game-list">
-          <button class="game-card" data-game="blockBreaker"><span class="g-icon">&#x1F9F1;</span><span class="g-name">Block Breaker</span><span class="g-desc">Break through</span></button>
-          <button class="game-card" data-game="bubblePop"><span class="g-icon">&#x1FAE7;</span><span class="g-name">Bubble Pop</span><span class="g-desc">Pop them all</span></button>
-          <button class="game-card" data-game="wordScramble"><span class="g-icon">&#x270F;&#xFE0F;</span><span class="g-name">Word Scramble</span><span class="g-desc">Unscramble me</span></button>
-          <button class="game-card" data-game="memoryMatch"><span class="g-icon">&#x1F0CF;</span><span class="g-name">Memory Match</span><span class="g-desc">Find the pairs</span></button>
-          <button class="game-card" data-game="heartCatcher"><span class="g-icon">&#x1F495;</span><span class="g-name">Heart Catcher</span><span class="g-desc">Catch the love</span></button>
+    </header>
+
+    <div class="hub-panels">
+
+      <!-- ARCADE -->
+      <div class="hub-panel active" id="panel-arcade">
+        <p class="panel-kicker">ARCADE · 6 GAMES</p>
+        <h2 class="panel-title">Birthday Arcade</h2>
+        <div class="game-grid">
+          <div class="game-card" data-game="snake">
+            <div class="gc-icon">🐍</div>
+            <div class="gc-info">
+              <h3>Snake</h3>
+              <span class="gc-best" id="best-snake">Best: 0</span>
+            </div>
+          </div>
+          <div class="game-card" data-game="runner">
+            <div class="gc-icon">🏃‍♀️</div>
+            <div class="gc-info">
+              <h3>Endless Run</h3>
+              <span class="gc-best" id="best-runner">Best: 0</span>
+            </div>
+          </div>
+          <div class="game-card" data-game="breaker">
+            <div class="gc-icon">💥</div>
+            <div class="gc-info">
+              <h3>Brick Breaker</h3>
+              <span class="gc-best" id="best-breaker">Best: 0</span>
+            </div>
+          </div>
+          <div class="game-card" data-game="taptarget">
+            <div class="gc-icon">🎯</div>
+            <div class="gc-info">
+              <h3>Tap Target</h3>
+              <span class="gc-best" id="best-taptarget">Best: 0</span>
+            </div>
+          </div>
+          <div class="game-card" data-game="game2048">
+            <div class="gc-icon">🔢</div>
+            <div class="gc-info">
+              <h3>2048</h3>
+              <span class="gc-best" id="best-2048">Best: 0</span>
+            </div>
+          </div>
+          <div class="game-card" data-game="memory">
+            <div class="gc-icon">🃏</div>
+            <div class="gc-info">
+              <h3>Memory Match</h3>
+              <span class="gc-best" id="best-memory">Best: --</span>
+            </div>
+          </div>
         </div>
-        <div id="game-area"></div>
       </div>
-      <div class="m-content" id="tab-gallery">
-        <div id="gallery-wrap"></div>
+
+      <!-- GALLERY -->
+      <div class="hub-panel hidden" id="panel-gallery">
+        <p class="panel-kicker">GALLERY · HER WORLD</p>
+        <h2 class="panel-title">Omosile 🌸</h2>
+        <div class="gallery-slider-wrap">
+          <div class="gallery-slider" id="gallery-slider">
+            <div class="gallery-slide">
+              <img src="assets/images/photo1.jpg" alt="Omosile"
+                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
+              <div class="img-missing-label">photo1.jpg</div>
+            </div>
+            <div class="gallery-slide">
+              <img src="assets/images/photo2.jpg" alt="Omosile"
+                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
+              <div class="img-missing-label">photo2.jpg</div>
+            </div>
+            <div class="gallery-slide">
+              <img src="assets/images/photo3.jpg" alt="Omosile"
+                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
+              <div class="img-missing-label">photo3.jpg</div>
+            </div>
+          </div>
+          <div class="gallery-dots" id="gallery-dots"></div>
+        </div>
+        <div class="video-list">
+          <p class="video-section-label">Videos 🎬</p>
+          <video class="gallery-video" controls playsinline preload="metadata">
+            <source src="assets/videos/video1.mp4" type="video/mp4">
+          </video>
+          <video class="gallery-video" controls playsinline preload="metadata">
+            <source src="assets/videos/video2.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-      <div class="m-content" id="tab-story">
-        <p class="story-save-hint">screenshot to keep &#x1F4F7;</p>
-        <div id="story-card"></div>
-        <p class="story-credit">&copy; starykingTBL</p>
+
+      <!-- US -->
+      <div class="hub-panel hidden" id="panel-us">
+        <p class="panel-kicker">US · JUST US</p>
+        <h2 class="panel-title">Me & You 🤍</h2>
+        <div class="voice-note-card">
+          <div class="voice-note-header">
+            <span class="voice-avatar">Ife</span>
+            <div class="voice-meta">
+              <span class="voice-name">Voice Note from Ife</span>
+              <span class="voice-sub">Something I wanted to say out loud</span>
+            </div>
+          </div>
+          <audio class="voice-player" id="voice-player"
+                 controls preload="metadata">
+            <source src="assets/audio/voice.mp3" type="audio/mpeg">
+          </audio>
+          <p class="voice-missing" id="voice-missing">
+            🎙 Voice note coming soon...
+          </p>
+        </div>
+        <div class="us-story-card">
+          <h3 class="us-story-title">How We Started 🕊</h3>
+          <p class="us-story-text" id="us-story-text"></p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="phase" id="ph-over">
-    <div id="over-content">
-      <p class="over-emoji">&#x1F388;</p>
-      <p class="over-title">The party&rsquo;s over.</p>
-      <p class="over-sub">But the love story isn&rsquo;t.</p>
-      <p class="over-sig">&copy; starykingTBL</p>
+    <nav class="bottom-nav">
+      <button class="nav-tab active" data-tab="arcade" type="button">
+        <span>🎮</span><span>Arcade</span>
+      </button>
+      <button class="nav-tab" data-tab="gallery" type="button">
+        <span>📸</span><span>Gallery</span>
+      </button>
+      <button class="nav-tab" data-tab="us" type="button">
+        <span>🤍</span><span>Us</span>
+      </button>
+    </nav>
+    <p class="watermark watermark-hub">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ SNAKE ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-snake">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-snake" type="button">← Back</button>
+      <span class="game-header-title">🐍 Snake</span>
+      <span class="game-header-score" id="score-snake">0</span>
+    </header>
+    <div class="game-canvas-wrap" id="wrap-snake">
+      <canvas id="canvas-snake"></canvas>
     </div>
+    <div class="game-overlay" id="overlay-snake">
+      <div class="overlay-box overlay-scroll">
+        <p class="overlay-emoji">🐍</p>
+        <h3>Snake</h3>
+        <p>Swipe to move. Walls wrap around.<br>Don't bite yourself.</p>
+        <p class="overlay-best">Best: <span id="ob-snake">0</span></p>
+        <div class="custom-panel">
+          <p class="custom-label">🎨 Colour</p>
+          <div class="swatch-row" id="snake-color-swatches"></div>
+          <p class="custom-label">🍎 Food</p>
+          <div class="emoji-row" id="snake-food-emojis"></div>
+          <p class="custom-label">🌌 Background</p>
+          <div class="bg-row" id="snake-bg-options"></div>
+        </div>
+        <button class="btn-glow" id="start-snake" type="button">Play 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ RUNNER ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-runner">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-runner" type="button">← Back</button>
+      <span class="game-header-title">🏃‍♀️ Endless Run</span>
+      <span class="game-header-score" id="score-runner">0</span>
+    </header>
+    <div class="game-canvas-wrap" id="wrap-runner">
+      <canvas id="canvas-runner"></canvas>
+    </div>
+    <div class="game-overlay" id="overlay-runner">
+      <div class="overlay-box overlay-scroll">
+        <p class="overlay-emoji">🏃‍♀️</p>
+        <h3>Endless Run</h3>
+        <p>Tap to jump. Tap again to double jump.<br>Collect stars. Dodge obstacles.</p>
+        <p class="overlay-best">Best: <span id="ob-runner">0</span></p>
+        <div class="custom-panel">
+          <p class="custom-label">🎭 Character</p>
+          <div class="emoji-row" id="runner-chars"></div>
+          <p class="custom-label">🌆 Scene</p>
+          <div class="emoji-row" id="runner-scenes"></div>
+        </div>
+        <button class="btn-glow" id="start-runner" type="button">Run 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ BREAKER ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-breaker">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-breaker" type="button">← Back</button>
+      <span class="game-header-title">💥 Brick Breaker</span>
+      <span class="game-header-score" id="score-breaker">0</span>
+    </header>
+    <div class="game-hud-bar">
+      <span>Lvl <span id="breaker-level">1</span></span>
+      <span id="breaker-lives-display">❤️❤️❤️</span>
+    </div>
+    <div class="game-canvas-wrap" id="wrap-breaker">
+      <canvas id="canvas-breaker"></canvas>
+    </div>
+    <div class="game-overlay" id="overlay-breaker">
+      <div class="overlay-box">
+        <p class="overlay-emoji">💥</p>
+        <h3>Brick Breaker</h3>
+        <p>Drag to move the paddle.<br>Clear all bricks to advance.<br>Break <strong>DISTANCE</strong> on Level 5.</p>
+        <p class="overlay-best">Best: <span id="ob-breaker">0</span></p>
+        <button class="btn-glow" id="start-breaker" type="button">Start 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ TAP TARGET ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-taptarget">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-taptarget" type="button">← Back</button>
+      <span class="game-header-title">🎯 Tap Target</span>
+      <span class="game-header-score" id="score-taptarget">0</span>
+    </header>
+    <div class="game-hud-bar">
+      <span>Time: <span id="tt-timer">30</span>s</span>
+      <span>Combo ×<span id="tt-combo">1</span></span>
+    </div>
+    <div class="game-canvas-wrap" id="wrap-taptarget">
+      <canvas id="canvas-taptarget"></canvas>
+    </div>
+    <div class="game-overlay" id="overlay-taptarget">
+      <div class="overlay-box">
+        <p class="overlay-emoji">🎯</p>
+        <h3>Tap Target</h3>
+        <p>Targets shrink and disappear.<br>Smaller = more points.<br>Hit streaks = combo multiplier.</p>
+        <p class="overlay-best">Best: <span id="ob-taptarget">0</span></p>
+        <button class="btn-glow" id="start-taptarget" type="button">Play 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ 2048 ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-2048">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-2048" type="button">← Back</button>
+      <span class="game-header-title">🔢 2048</span>
+      <button class="btn-new-game" id="btn-new-2048" type="button">New</button>
+    </header>
+    <div class="g2048-wrap">
+      <div class="g2048-score-row">
+        <div class="g2048-score-box">
+          <span class="g2048-label">SCORE</span>
+          <span id="g2048-score">0</span>
+        </div>
+        <div class="g2048-score-box">
+          <span class="g2048-label">BEST</span>
+          <span id="g2048-best">0</span>
+        </div>
+      </div>
+      <div class="g2048-grid" id="g2048-grid"></div>
+      <p class="g2048-hint">Swipe or use arrow keys to move</p>
+    </div>
+    <div class="game-overlay" id="overlay-2048">
+      <div class="overlay-box">
+        <p class="overlay-emoji">🔢</p>
+        <h3>2048</h3>
+        <p>Swipe to slide all tiles.<br>Match same numbers to merge.<br>Get to <strong>2048</strong> to win!</p>
+        <p class="overlay-best">Best: <span id="ob-2048">0</span></p>
+        <button class="btn-glow" id="start-2048" type="button">Play 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- ═══════════════ MEMORY MATCH ═══════════════ -->
+  <section class="screen hidden game-screen" id="screen-memory">
+    <header class="game-header">
+      <button class="btn-back-game" id="back-memory" type="button">← Back</button>
+      <span class="game-header-title">🃏 Memory Match</span>
+      <div class="mem-hud">
+        <span id="mem-flips">0 flips</span>
+        <span id="mem-timer">0:00</span>
+      </div>
+    </header>
+    <div class="memory-wrap" id="wrap-memory">
+      <div class="memory-grid" id="memory-grid"></div>
+    </div>
+    <div class="game-overlay" id="overlay-memory">
+      <div class="overlay-box">
+        <p class="overlay-emoji">🃏</p>
+        <h3>Memory Match</h3>
+        <p>Flip cards to find all matching pairs.<br>Fewest flips wins. Best time saved.</p>
+        <p class="overlay-best">Best: <span id="ob-memory">--</span></p>
+        <button class="btn-glow" id="start-memory" type="button">Play 🎮</button>
+      </div>
+    </div>
+    <p class="watermark">© starykingTBL 2026</p>
+  </section>
+
+  <!-- TOAST -->
+  <div class="toast hidden" id="toast" role="alert" aria-live="polite">
+    <span id="toast-icon">✓</span>
+    <span id="toast-msg">—</span>
   </div>
 
-  <script src="script.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/games/snake.js"></script>
+  <script src="js/games/runner.js"></script>
+  <script src="js/games/breaker.js"></script>
+  <script src="js/games/taptarget.js"></script>
+  <script src="js/games/game2048.js"></script>
+  <script src="js/games/memorymatch.js"></script>
 </body>
 </html>
