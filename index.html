@@ -1,419 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#020817">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent">
-  <title>Happy 19th, Omosile 🤍</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap"
-        rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="grain" aria-hidden="true"></div>
-  <div class="bg-orbs" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
-  <!-- ═══════════════ SCREEN 1: LANDING ═══════════════ -->
-  <section class="screen active" id="screen-landing">
-    <div class="landing-wrap">
-      <div class="landing-sparkles" id="landing-sparkles"></div>
-      <div class="landing-badge">
-        <span class="badge-dot"></span>
-        <span>A gift. Just for you.</span>
-      </div>
-      <h1 class="landing-name">Omosile<span class="name-heart">🤍</span></h1>
-      <p class="landing-age">Turning <em>nineteen</em></p>
-
-      <div class="landing-card">
-        <p class="lc-title">Nineteen looks good on you. 🎂</p>
-        <p class="lc-body">Not just today — always. You carry yourself like someone who actually knows her worth. That is not a small thing and I need you to hear it.</p>
-        <p class="lc-body">I made you something. Take your time with it.</p>
-        <p class="lc-sig">— Ife 🖤</p>
-      </div>
-
-      <button class="btn-glow" id="btn-open" type="button">
-        Open Your Gift 🎁
-      </button>
-      <p class="watermark">© starykingTBL 2026</p>
+  <!-- ═══════════════════════════════════════════
+       STAGE 1: HELLO
+  ════════════════════════════════════════════ -->
+  <section id="stage-hello" class="stage active">
+    <div class="stage-center">
+      <span class="hello-text">Hello</span>
     </div>
   </section>
 
-  <!-- ═══════════════ SCREEN 2: LOVE LETTER ═══════════════ -->
-  <section class="screen hidden" id="screen-letter">
-    <div class="story-wrap">
-      <div class="story-body" id="letter-body"></div>
-      <button class="btn-glow btn-continue" id="btn-letter-next"
-              type="button">Continue 🤍</button>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
+  <!-- ═══════════════════════════════════════════
+       STAGE 2: CAKE + CTA
+  ════════════════════════════════════════════ -->
+  <section id="stage-cake" class="stage">
+    <div class="stage-center cake-center">
+      <div class="cake-wrapper">
+        <div class="cake-svg-wrap">
+          <!-- Layered SVG Cake -->
+          <svg class="cake-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Candle flames -->
+            <ellipse class="flame flame-1" cx="100" cy="28" rx="5" ry="8" fill="#ff6b35" opacity="0.9"/>
+            <ellipse class="flame flame-2" cx="100" cy="28" rx="3" ry="5" fill="#ffd166" opacity="0.9"/>
+            <!-- Candle -->
+            <rect x="96" y="36" width="8" height="24" rx="2" fill="#6b1a2a"/>
+            <!-- Top tier -->
+            <ellipse cx="100" cy="68" rx="40" ry="10" fill="#1a0a0f"/>
+            <rect x="60" y="68" width="80" height="32" fill="#1a0a0f"/>
+            <ellipse cx="100" cy="100" rx="40" ry="10" fill="#2a0d14"/>
+            <!-- Drip accent top tier -->
+            <path d="M65 72 Q70 80 68 88" stroke="#6b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M128 74 Q125 83 130 90" stroke="#6b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- Mid tier -->
+            <ellipse cx="100" cy="100" rx="55" ry="12" fill="#120508"/>
+            <rect x="45" y="100" width="110" height="38" fill="#120508"/>
+            <ellipse cx="100" cy="138" rx="55" ry="12" fill="#1e0a10"/>
+            <!-- Drip accent mid tier -->
+            <path d="M52 104 Q48 115 53 124" stroke="#8b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M148 106 Q152 118 147 126" stroke="#8b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M100 104 Q96 114 101 122" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Bottom tier -->
+            <ellipse cx="100" cy="138" rx="70" ry="14" fill="#0c0407"/>
+            <rect x="30" y="138" width="140" height="44" fill="#0c0407"/>
+            <ellipse cx="100" cy="182" rx="70" ry="14" fill="#180810"/>
+            <!-- Plate -->
+            <ellipse cx="100" cy="192" rx="80" ry="10" fill="#1a0a0f" opacity="0.6"/>
+            <!-- Decorative ring on bottom tier -->
+            <ellipse cx="100" cy="155" rx="60" ry="8" fill="none" stroke="#6b1a2a" stroke-width="1.5" opacity="0.6"/>
+          </svg>
+        </div>
 
-  <!-- ═══════════════ SCREEN 3: GRAND FINALE ═══════════════ -->
-  <section class="screen hidden" id="screen-finale">
-    <canvas id="confetti-canvas"></canvas>
-    <div class="finale-wrap">
-      <div class="finale-emoji-row" id="finale-emojis">
-        🎂✨💙🎉🌸🎈🥳
+        <h1 class="birthday-text">Happy Birthday</h1>
+        <button id="btn-open-gift" class="cta-btn" aria-label="Open your gift">
+          <span class="btn-label">Open Gift</span>
+          <span class="btn-ring"></span>
+        </button>
       </div>
-      <h1 class="finale-hbd">Happy 19th Birthday</h1>
-      <h2 class="finale-name"><em>Omosile</em> 🤍</h2>
-      <p class="finale-sub">
-        Nineteen looks good on you.<br>It was always going to.
-      </p>
-      <button class="btn-scroll-down" id="btn-to-writeup" type="button">
-        <span>There's more</span>
-        <span class="arrow-down">↓</span>
-      </button>
     </div>
-    <p class="watermark">© starykingTBL 2026</p>
   </section>
 
-  <!-- ═══════════════ SCREEN 4: WRITE-UP ═══════════════ -->
-  <!-- user-select enabled on this screen so text is copyable -->
-  <section class="screen hidden screen-writeup" id="screen-writeup">
-    <div class="writeup-wrap">
-      <div class="writeup-content" id="writeup-content"></div>
-      <div class="writeup-divider"></div>
-      <button class="btn-glow" id="btn-enter-arcade" type="button">
-        Enter Your Arcade 🎮
-      </button>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- ═══════════════ SCREEN 5: HUB ═══════════════ -->
-  <section class="screen hidden" id="screen-hub">
-    <header class="hub-header">
-      <span class="hub-greeting">Okomi's World 🌸</span>
-      <div class="hub-keys-badge">
-        <span>🗝</span><span id="hub-keys">0</span>
+  <!-- ═══════════════════════════════════════════
+       STAGE 3: ENVELOPE
+  ════════════════════════════════════════════ -->
+  <section id="stage-envelope" class="stage">
+    <div class="stage-center">
+      <div id="envelope-wrap" class="envelope-wrap" role="button" aria-label="Open envelope" tabindex="0">
+        <div class="envelope">
+          <!-- Envelope body -->
+          <div class="env-body">
+            <div class="env-flap-back"></div>
+            <div class="env-pocket"></div>
+            <!-- Wax seal -->
+            <div class="env-seal">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="20" cy="20" r="18" fill="#6b1a2a"/>
+                <text x="20" y="26" text-anchor="middle" font-size="18" fill="#c9a96e" font-family="Georgia, serif">♥</text>
+              </svg>
+            </div>
+            <div class="env-flap-front"></div>
+          </div>
+          <p class="env-hint">tap to open</p>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       STAGE 4: LETTER
+  ════════════════════════════════════════════ -->
+  <section id="stage-letter" class="stage">
+    <div class="letter-container">
+      <div class="paper-sheet">
+        <div class="paper-inner">
+          <p class="letter-salutation">My love,</p>
+
+          <!-- ↓↓↓ PASTE YOUR LETTER TEXT BETWEEN THESE COMMENTS ↓↓↓ -->
+          <div id="letter-body" class="letter-body">
+            <p>I've been thinking about what to write here for a long time — not because I didn't know what to say, but because everything I feel for you is larger than sentences.</p>
+            <p>You turned 19 today. Which means another year of you being exactly who you are: the person who makes ordinary days feel like something worth remembering.</p>
+            <p>I don't need a reason to love you. But birthdays are a good excuse to say it louder.</p>
+            <p>Happy birthday. This whole thing — every pixel, every line of code — was made for you.</p>
+          </div>
+          <!-- ↑↑↑ END OF LETTER TEXT ↑↑↑ -->
+
+          <p class="letter-sign">Yours,<br/><em>always</em></p>
+        </div>
+
+        <div class="letter-footer">
+          <button id="btn-enter-arcade" class="arcade-btn" aria-label="Enter The Arcade">
+            <span>Enter The Arcade</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2: ARCADE HUB
+  ════════════════════════════════════════════ -->
+  <section id="section-arcade" class="arcade-section" aria-label="The Arcade">
+
+    <header class="arcade-header">
+      <div class="arcade-header-inner">
+        <span class="arcade-eyebrow">birthday edition</span>
+        <h2 class="arcade-title">The Arcade</h2>
+        <p class="arcade-subtitle">seven games, just for you</p>
+      </div>
+      <div class="header-line"></div>
     </header>
 
-    <div class="hub-panels">
+    <div class="game-grid" role="list">
 
-      <!-- ARCADE -->
-      <div class="hub-panel active" id="panel-arcade">
-        <p class="panel-kicker">ARCADE · 6 GAMES</p>
-        <h2 class="panel-title">Birthday Arcade</h2>
-        <div class="game-grid">
-          <div class="game-card" data-game="snake">
-            <div class="gc-icon">🐍</div>
-            <div class="gc-info">
-              <h3>Snake</h3>
-              <span class="gc-best" id="best-snake">Best: 0</span>
-            </div>
+      <!-- Card 01 — Snake -->
+      <article class="game-card" data-game="snake" role="listitem" tabindex="0" aria-label="Play Snake">
+        <div class="card-inner">
+          <div class="card-number">01</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 24 Q8 8 24 8 Q40 8 40 24 Q40 36 28 36 Q20 36 20 28 Q20 20 28 20" stroke="#8b1a2a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <circle cx="40" cy="24" r="3" fill="#8b1a2a"/>
+            </svg>
           </div>
-          <div class="game-card" data-game="runner">
-            <div class="gc-icon">🏃‍♀️</div>
-            <div class="gc-info">
-              <h3>Endless Run</h3>
-              <span class="gc-best" id="best-runner">Best: 0</span>
-            </div>
-          </div>
-          <div class="game-card" data-game="breaker">
-            <div class="gc-icon">💥</div>
-            <div class="gc-info">
-              <h3>Brick Breaker</h3>
-              <span class="gc-best" id="best-breaker">Best: 0</span>
-            </div>
-          </div>
-          <div class="game-card" data-game="taptarget">
-            <div class="gc-icon">🎯</div>
-            <div class="gc-info">
-              <h3>Tap Target</h3>
-              <span class="gc-best" id="best-taptarget">Best: 0</span>
-            </div>
-          </div>
-          <div class="game-card" data-game="game2048">
-            <div class="gc-icon">🔢</div>
-            <div class="gc-info">
-              <h3>2048</h3>
-              <span class="gc-best" id="best-2048">Best: 0</span>
-            </div>
-          </div>
-          <div class="game-card" data-game="memory">
-            <div class="gc-icon">🃏</div>
-            <div class="gc-info">
-              <h3>Memory Match</h3>
-              <span class="gc-best" id="best-memory">Best: --</span>
-            </div>
+          <h3 class="card-title">Snake</h3>
+          <p class="card-desc">Wrap-around walls. Custom skins &amp; food.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
           </div>
         </div>
-      </div>
+        <div class="card-glow"></div>
+      </article>
 
-      <!-- GALLERY -->
-      <div class="hub-panel hidden" id="panel-gallery">
-        <p class="panel-kicker">GALLERY · HER WORLD</p>
-        <h2 class="panel-title">Omosile 🌸</h2>
-        <div class="gallery-slider-wrap">
-          <div class="gallery-slider" id="gallery-slider">
-            <div class="gallery-slide">
-              <img src="assets/images/photo1.jpg" alt="Omosile"
-                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
-              <div class="img-missing-label">photo1.jpg</div>
-            </div>
-            <div class="gallery-slide">
-              <img src="assets/images/photo2.jpg" alt="Omosile"
-                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
-              <div class="img-missing-label">photo2.jpg</div>
-            </div>
-            <div class="gallery-slide">
-              <img src="assets/images/photo3.jpg" alt="Omosile"
-                   onerror="this.closest('.gallery-slide').classList.add('img-missing')">
-              <div class="img-missing-label">photo3.jpg</div>
-            </div>
+      <!-- Card 02 — Endless Runner -->
+      <article class="game-card" data-game="runner" role="listitem" tabindex="0" aria-label="Play Endless Runner">
+        <div class="card-inner">
+          <div class="card-number">02</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="10" r="4" stroke="#8b1a2a" stroke-width="2.5"/>
+              <path d="M30 14 L26 24 L18 28 M30 14 L34 24 L38 34 M26 24 L22 34" stroke="#8b1a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-          <div class="gallery-dots" id="gallery-dots"></div>
+          <h3 class="card-title">Endless Runner</h3>
+          <p class="card-desc">Parallax world. Particles. Mobile-optimized.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
         </div>
-        <div class="video-list">
-          <p class="video-section-label">Videos 🎬</p>
-          <video class="gallery-video" controls playsinline preload="metadata">
-            <source src="assets/videos/video1.mp4" type="video/mp4">
-          </video>
-          <video class="gallery-video" controls playsinline preload="metadata">
-            <source src="assets/videos/video2.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+        <div class="card-glow"></div>
+      </article>
 
-      <!-- US -->
-      <div class="hub-panel hidden" id="panel-us">
-        <p class="panel-kicker">US · JUST US</p>
-        <h2 class="panel-title">Me & You 🤍</h2>
-        <div class="voice-note-card">
-          <div class="voice-note-header">
-            <span class="voice-avatar">Ife</span>
-            <div class="voice-meta">
-              <span class="voice-name">Voice Note from Ife</span>
-              <span class="voice-sub">Something I wanted to say out loud</span>
-            </div>
+      <!-- Card 03 — Brick Breaker -->
+      <article class="game-card" data-game="brickbreaker" role="listitem" tabindex="0" aria-label="Play Brick Breaker">
+        <div class="card-inner">
+          <div class="card-number">03</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/>
+              <rect x="24" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2" opacity=".5"/>
+              <rect x="14" y="19" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/>
+              <circle cx="24" cy="34" r="3" fill="#8b1a2a"/>
+              <rect x="12" y="40" width="20" height="4" rx="2" stroke="#8b1a2a" stroke-width="2"/>
+            </svg>
           </div>
-          <audio class="voice-player" id="voice-player"
-                 controls preload="metadata">
-            <source src="assets/audio/voice.mp3" type="audio/mpeg">
-          </audio>
-          <p class="voice-missing" id="voice-missing">
-            🎙 Voice note coming soon...
-          </p>
+          <h3 class="card-title">Brick Breaker</h3>
+          <p class="card-desc">Multi-level. Tough &amp; unbreakable bricks.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
         </div>
-        <div class="us-story-card">
-          <h3 class="us-story-title">How We Started 🕊</h3>
-          <p class="us-story-text" id="us-story-text"></p>
+        <div class="card-glow"></div>
+      </article>
+
+      <!-- Card 04 — Tap Target -->
+      <article class="game-card" data-game="taptarget" role="listitem" tabindex="0" aria-label="Play Tap Target">
+        <div class="card-inner">
+          <div class="card-number">04</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="16" stroke="#8b1a2a" stroke-width="2"/>
+              <circle cx="24" cy="24" r="9" stroke="#8b1a2a" stroke-width="2" opacity=".6"/>
+              <circle cx="24" cy="24" r="3" fill="#8b1a2a"/>
+              <line x1="24" y1="4" x2="24" y2="10" stroke="#8b1a2a" stroke-width="2"/>
+              <line x1="24" y1="38" x2="24" y2="44" stroke="#8b1a2a" stroke-width="2"/>
+              <line x1="4" y1="24" x2="10" y2="24" stroke="#8b1a2a" stroke-width="2"/>
+              <line x1="38" y1="24" x2="44" y2="24" stroke="#8b1a2a" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Tap Target</h3>
+          <p class="card-desc">Speed &amp; accuracy. Targets vanish fast.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
         </div>
+        <div class="card-glow"></div>
+      </article>
+
+      <!-- Card 05 — 2048 -->
+      <article class="game-card" data-game="2048" role="listitem" tabindex="0" aria-label="Play 2048">
+        <div class="card-inner">
+          <div class="card-number">05</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/>
+              <rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/>
+              <rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/>
+              <rect x="26" y="26" width="16" height="16" rx="3" fill="#6b1a2a" stroke="#8b1a2a" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3 class="card-title">2048</h3>
+          <p class="card-desc">Sliding tiles in our dark aesthetic.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="card-glow"></div>
+      </article>
+
+      <!-- Card 06 — Memory Match -->
+      <article class="game-card" data-game="memory" role="listitem" tabindex="0" aria-label="Play Memory Match">
+        <div class="card-inner">
+          <div class="card-number">06</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/>
+              <rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/>
+              <rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/>
+              <rect x="26" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/>
+              <path d="M10 14 Q14 8 18 14" stroke="#8b1a2a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M30 14 Q34 8 38 14" stroke="#8b1a2a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Memory Match</h3>
+          <p class="card-desc">Timed card-flipping. Beat the clock.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="card-glow"></div>
+      </article>
+
+      <!-- Card 07 — Flappy Style -->
+      <article class="game-card" data-game="flappy" role="listitem" tabindex="0" aria-label="Play Flappy Style">
+        <div class="card-inner">
+          <div class="card-number">07</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 24 Q16 14 24 24 Q32 34 40 24" stroke="#8b1a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <ellipse cx="24" cy="24" rx="5" ry="4" fill="#6b1a2a"/>
+              <path d="M24 20 Q30 14 36 18" stroke="#8b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Flappy Style</h3>
+          <p class="card-desc">Tap to fly. Tight physics. Brutal gaps.</p>
+          <div class="card-cta">
+            <span>Play</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+        <div class="card-glow"></div>
+      </article>
+
+    </div><!-- /game-grid -->
+
+    <!-- Individual game overlay — games will be injected here by JS -->
+    <div id="game-overlay" class="game-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Game screen">
+      <div class="game-overlay-header">
+        <button id="btn-back-arcade" class="back-btn" aria-label="Back to Arcade">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Arcade</span>
+        </button>
+        <span id="game-overlay-title" class="game-overlay-title"></span>
+        <span class="game-overlay-spacer"></span>
       </div>
+      <div id="game-mount" class="game-mount"></div>
     </div>
 
-    <nav class="bottom-nav">
-      <button class="nav-tab active" data-tab="arcade" type="button">
-        <span>🎮</span><span>Arcade</span>
-      </button>
-      <button class="nav-tab" data-tab="gallery" type="button">
-        <span>📸</span><span>Gallery</span>
-      </button>
-      <button class="nav-tab" data-tab="us" type="button">
-        <span>🤍</span><span>Us</span>
-      </button>
-    </nav>
-    <p class="watermark watermark-hub">© starykingTBL 2026</p>
   </section>
 
-  <!-- ═══════════════ SNAKE ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-snake">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-snake" type="button">← Back</button>
-      <span class="game-header-title">🐍 Snake</span>
-      <span class="game-header-score" id="score-snake">0</span>
-    </header>
-    <div class="game-canvas-wrap" id="wrap-snake">
-      <canvas id="canvas-snake"></canvas>
-    </div>
-    <div class="game-overlay" id="overlay-snake">
-      <div class="overlay-box overlay-scroll">
-        <p class="overlay-emoji">🐍</p>
-        <h3>Snake</h3>
-        <p>Swipe to move. Walls wrap around.<br>Don't bite yourself.</p>
-        <p class="overlay-best">Best: <span id="ob-snake">0</span></p>
-        <div class="custom-panel">
-          <p class="custom-label">🎨 Colour</p>
-          <div class="swatch-row" id="snake-color-swatches"></div>
-          <p class="custom-label">🍎 Food</p>
-          <div class="emoji-row" id="snake-food-emojis"></div>
-          <p class="custom-label">🌌 Background</p>
-          <div class="bg-row" id="snake-bg-options"></div>
-        </div>
-        <button class="btn-glow" id="start-snake" type="button">Play 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
+  <!-- Ambient particle canvas (decorative, runs on idle) -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
 
-  <!-- ═══════════════ RUNNER ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-runner">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-runner" type="button">← Back</button>
-      <span class="game-header-title">🏃‍♀️ Endless Run</span>
-      <span class="game-header-score" id="score-runner">0</span>
-    </header>
-    <div class="game-canvas-wrap" id="wrap-runner">
-      <canvas id="canvas-runner"></canvas>
-    </div>
-    <div class="game-overlay" id="overlay-runner">
-      <div class="overlay-box overlay-scroll">
-        <p class="overlay-emoji">🏃‍♀️</p>
-        <h3>Endless Run</h3>
-        <p>Tap to jump. Tap again to double jump.<br>Collect stars. Dodge obstacles.</p>
-        <p class="overlay-best">Best: <span id="ob-runner">0</span></p>
-        <div class="custom-panel">
-          <p class="custom-label">🎭 Character</p>
-          <div class="emoji-row" id="runner-chars"></div>
-          <p class="custom-label">🌆 Scene</p>
-          <div class="emoji-row" id="runner-scenes"></div>
-        </div>
-        <button class="btn-glow" id="start-runner" type="button">Run 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- ═══════════════ BREAKER ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-breaker">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-breaker" type="button">← Back</button>
-      <span class="game-header-title">💥 Brick Breaker</span>
-      <span class="game-header-score" id="score-breaker">0</span>
-    </header>
-    <div class="game-hud-bar">
-      <span>Lvl <span id="breaker-level">1</span></span>
-      <span id="breaker-lives-display">❤️❤️❤️</span>
-    </div>
-    <div class="game-canvas-wrap" id="wrap-breaker">
-      <canvas id="canvas-breaker"></canvas>
-    </div>
-    <div class="game-overlay" id="overlay-breaker">
-      <div class="overlay-box">
-        <p class="overlay-emoji">💥</p>
-        <h3>Brick Breaker</h3>
-        <p>Drag to move the paddle.<br>Clear all bricks to advance.<br>Break <strong>DISTANCE</strong> on Level 5.</p>
-        <p class="overlay-best">Best: <span id="ob-breaker">0</span></p>
-        <button class="btn-glow" id="start-breaker" type="button">Start 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- ═══════════════ TAP TARGET ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-taptarget">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-taptarget" type="button">← Back</button>
-      <span class="game-header-title">🎯 Tap Target</span>
-      <span class="game-header-score" id="score-taptarget">0</span>
-    </header>
-    <div class="game-hud-bar">
-      <span>Time: <span id="tt-timer">30</span>s</span>
-      <span>Combo ×<span id="tt-combo">1</span></span>
-    </div>
-    <div class="game-canvas-wrap" id="wrap-taptarget">
-      <canvas id="canvas-taptarget"></canvas>
-    </div>
-    <div class="game-overlay" id="overlay-taptarget">
-      <div class="overlay-box">
-        <p class="overlay-emoji">🎯</p>
-        <h3>Tap Target</h3>
-        <p>Targets shrink and disappear.<br>Smaller = more points.<br>Hit streaks = combo multiplier.</p>
-        <p class="overlay-best">Best: <span id="ob-taptarget">0</span></p>
-        <button class="btn-glow" id="start-taptarget" type="button">Play 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- ═══════════════ 2048 ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-2048">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-2048" type="button">← Back</button>
-      <span class="game-header-title">🔢 2048</span>
-      <button class="btn-new-game" id="btn-new-2048" type="button">New</button>
-    </header>
-    <div class="g2048-wrap">
-      <div class="g2048-score-row">
-        <div class="g2048-score-box">
-          <span class="g2048-label">SCORE</span>
-          <span id="g2048-score">0</span>
-        </div>
-        <div class="g2048-score-box">
-          <span class="g2048-label">BEST</span>
-          <span id="g2048-best">0</span>
-        </div>
-      </div>
-      <div class="g2048-grid" id="g2048-grid"></div>
-      <p class="g2048-hint">Swipe or use arrow keys to move</p>
-    </div>
-    <div class="game-overlay" id="overlay-2048">
-      <div class="overlay-box">
-        <p class="overlay-emoji">🔢</p>
-        <h3>2048</h3>
-        <p>Swipe to slide all tiles.<br>Match same numbers to merge.<br>Get to <strong>2048</strong> to win!</p>
-        <p class="overlay-best">Best: <span id="ob-2048">0</span></p>
-        <button class="btn-glow" id="start-2048" type="button">Play 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- ═══════════════ MEMORY MATCH ═══════════════ -->
-  <section class="screen hidden game-screen" id="screen-memory">
-    <header class="game-header">
-      <button class="btn-back-game" id="back-memory" type="button">← Back</button>
-      <span class="game-header-title">🃏 Memory Match</span>
-      <div class="mem-hud">
-        <span id="mem-flips">0 flips</span>
-        <span id="mem-timer">0:00</span>
-      </div>
-    </header>
-    <div class="memory-wrap" id="wrap-memory">
-      <div class="memory-grid" id="memory-grid"></div>
-    </div>
-    <div class="game-overlay" id="overlay-memory">
-      <div class="overlay-box">
-        <p class="overlay-emoji">🃏</p>
-        <h3>Memory Match</h3>
-        <p>Flip cards to find all matching pairs.<br>Fewest flips wins. Best time saved.</p>
-        <p class="overlay-best">Best: <span id="ob-memory">--</span></p>
-        <button class="btn-glow" id="start-memory" type="button">Play 🎮</button>
-      </div>
-    </div>
-    <p class="watermark">© starykingTBL 2026</p>
-  </section>
-
-  <!-- TOAST -->
-  <div class="toast hidden" id="toast" role="alert" aria-live="polite">
-    <span id="toast-icon">✓</span>
-    <span id="toast-msg">—</span>
-  </div>
-
-  <script src="js/data.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/confetti.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/story.js"></script>
-  <script src="js/gallery.js"></script>
-  <script src="js/games/snake.js"></script>
-  <script src="js/games/runner.js"></script>
-  <script src="js/games/breaker.js"></script>
-  <script src="js/games/taptarget.js"></script>
-  <script src="js/games/game2048.js"></script>
-  <script src="js/games/memorymatch.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
