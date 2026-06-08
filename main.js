@@ -1,357 +1,385 @@
-/**
- * CAKEPROTOL19 — main.js
- * Cinematic Sequencer · Ambient Canvas · Arcade Router
- * Pure Vanilla JS. Zero dependencies. Mobile-first.
- */
-
+cat > main.js << 'JSEOF'
 'use strict';
 
-/* ─────────────────────────────────────────────────────────────
-   CONSTANTS & CONFIG
-───────────────────────────────────────────────────────────── */
+/* ── MUSIC SOURCES (royalty-free CDN) ── */
+const MUSIC_TRACKS = [
+  'https://cdn.pixabay.com/audio/2023/10/09/audio_f4c6f5d3e6.mp3',
+  'https://cdn.pixabay.com/audio/2022/10/25/audio_946ff838d6.mp3',
+];
+
+/* ── INTRO LINES ── */
+const INTRO_LINES = [
+  'Yoo Nigga',
+  "Just like I said, I've decided to add 'H' to Omosile",
+  'So OMOSHILE',
+  'Nineteen looks good on you',
+  'Really, really good',
+  'I made something for you',
+];
+
+/* ── CAKE GREETING LINES ── */
+const CAKE_LINES = [
+  'Happy Birthday Omoshile',
+  'Nineteen never looked this good',
+  'This one is all for you ♥',
+];
+
+/* ── GAME META ── */
 const GAME_META = {
-  snake:        { title: 'Snake',         file: 'games/snake.js'        },
-  runner:       { title: 'Endless Runner',file: 'games/runner.js'       },
-  brickbreaker: { title: 'Brick Breaker', file: 'games/brickbreaker.js' },
-  taptarget:    { title: 'Tap Target',    file: 'games/taptarget.js'    },
-  '2048':       { title: '2048',          file: 'games/game2048.js'     },
-  memory:       { title: 'Memory Match',  file: 'games/memory.js'       },
-  flappy:       { title: 'Flappy Style',  file: 'games/flappy.js'       },
+  snake:        { title:'Snake' },
+  runner:       { title:'Endless Runner' },
+  brickbreaker: { title:'Brick Breaker' },
+  taptarget:    { title:'Tap Target' },
+  '2048':       { title:'2048' },
+  memory:       { title:'Memory Match' },
+  flappy:       { title:'Flappy Style' },
 };
 
-/* ─────────────────────────────────────────────────────────────
-   DOM REFERENCES
-───────────────────────────────────────────────────────────── */
-const $  = (sel, ctx = document) => ctx.querySelector(sel);
-const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+/* ── DOM ── */
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 
-const stageHello    = $('#stage-hello');
+const stageIntro    = $('#stage-intro');
 const stageCake     = $('#stage-cake');
 const stageEnvelope = $('#stage-envelope');
 const stageLetter   = $('#stage-letter');
 const sectionArcade = $('#section-arcade');
-
-const cakeWrapper   = $('.cake-wrapper');
+const introTextEl   = $('#intro-text');
+const cakeGreeting  = $('#cake-greeting');
 const envelopeWrap  = $('#envelope-wrap');
 const letterSalut   = $('.letter-salutation');
 const letterParas   = $$('#letter-body p');
 const letterSign    = $('.letter-sign');
 const arcadeBtn     = $('#btn-enter-arcade');
-
 const btnOpenGift   = $('#btn-open-gift');
-const btnEnterArcade= $('#btn-enter-arcade');
-const btnBackArcade = $('#btn-back-arcade');
-
 const gameOverlay   = $('#game-overlay');
 const gameMount     = $('#game-mount');
 const gameOverTitle = $('#game-overlay-title');
-
+const btnBack       = $('#btn-back-arcade');
 const ambientCanvas = $('#ambient-canvas');
+const bgMusic       = $('#bg-music');
+const btnMute       = $('#btn-mute');
+const btnVolUp      = $('#btn-vol-up');
+const btnVolDown    = $('#btn-vol-down');
+const volFill       = $('#vol-fill');
+const iconSound     = $('#icon-sound');
+const iconMute      = $('#icon-mute');
+const btnTheme      = $('#btn-theme');
+const iconMoon      = $('#icon-moon');
+const iconSun       = $('#icon-sun');
 
-/* ─────────────────────────────────────────────────────────────
-   STAGE UTILITIES
-───────────────────────────────────────────────────────────── */
-function showStage(el, delay = 0) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      el.classList.add('active');
-      el.classList.remove('exit');
-      resolve();
-    }, delay);
+/* ── HELPERS ── */
+function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+function showStage(el, delay = 0){
+  return new Promise(r => {
+    setTimeout(() => { el.classList.add('active'); r(); }, delay);
   });
 }
 
-function hideStage(el, delay = 0) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      el.classList.remove('active');
-      el.classList.add('exit');
-      // Remove exit class after transition so it doesn't linger
-      el.addEventListener('transitionend', () => el.classList.remove('exit'), { once: true });
-      resolve();
-    }, delay);
-  });
+function hideStage(el){
+  el.classList.remove('active');
 }
 
-function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+/* ── SOUND FX (Web Audio API — no files needed) ── */
+let audioCtx = null;
+
+function getAudioCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   AMBIENT PARTICLE CANVAS
-   Lightweight, RAF-throttled, low particle count for mobile
-───────────────────────────────────────────────────────────── */
-const AmbientCanvas = (() => {
-  const ctx    = ambientCanvas.getContext('2d');
-  let W, H, particles, raf, lastFrame = 0;
-  const FPS    = 30;
-  const FDELAY = 1000 / FPS;
-  const COUNT  = window.innerWidth < 500 ? 18 : 32;
+function playTone(freq, type, duration, vol = 0.15){
+  try {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + duration);
+  } catch(e){}
+}
 
-  function resize() {
-    W = ambientCanvas.width  = window.innerWidth;
-    H = ambientCanvas.height = window.innerHeight;
+const SFX = {
+  click()    { playTone(520, 'sine', 0.12, 0.1); },
+  whoosh()   { playTone(200, 'sawtooth', 0.3, 0.08); setTimeout(() => playTone(400,'sine',0.2,0.06), 100); },
+  reveal()   { playTone(660, 'sine', 0.25, 0.07); },
+  seal()     { playTone(300, 'triangle', 0.4, 0.12); setTimeout(() => playTone(180,'triangle',0.3,0.1),150); },
+  paperRustle(){ playTone(800,'sawtooth',0.15,0.04); setTimeout(()=>playTone(600,'sawtooth',0.12,0.04),80); },
+  arcade()   {
+    [523,659,784,1047].forEach((f,i) => setTimeout(() => playTone(f,'square',0.18,0.08), i*80));
+  },
+};
+
+/* ── MUSIC PLAYER ── */
+let volume = 0.8;
+let muted  = false;
+
+function initMusic(){
+  bgMusic.src = MUSIC_TRACKS[0];
+  bgMusic.volume = volume;
+  bgMusic.loop = true;
+  bgMusic.onerror = () => { bgMusic.src = MUSIC_TRACKS[1]; bgMusic.play().catch(()=>{}); };
+  updateVolUI();
+}
+
+function tryPlayMusic(){
+  if(bgMusic.paused){
+    bgMusic.play().catch(() => {
+      // Autoplay blocked — play on first tap
+      document.addEventListener('touchstart', () => bgMusic.play().catch(()=>{}), { once: true });
+      document.addEventListener('click', () => bgMusic.play().catch(()=>{}), { once: true });
+    });
   }
+}
 
-  function mkParticle() {
-    return {
-      x:  Math.random() * (W || window.innerWidth),
-      y:  Math.random() * (H || window.innerHeight),
-      r:  Math.random() * 1.5 + 0.3,
-      a:  Math.random() * Math.PI * 2,
-      s:  Math.random() * 0.18 + 0.04,   // speed
-      o:  Math.random() * 0.4 + 0.05,    // opacity
-      do: (Math.random() - 0.5) * 0.006, // opacity drift
-    };
-  }
+function updateVolUI(){
+  volFill.style.width = (muted ? 0 : volume * 100) + '%';
+  iconSound.style.display = muted ? 'none' : 'block';
+  iconMute.style.display  = muted ? 'block' : 'none';
+}
 
-  function init() {
-    resize();
-    particles = Array.from({ length: COUNT }, mkParticle);
-    window.addEventListener('resize', () => { resize(); });
-  }
+btnMute.addEventListener('click', () => {
+  muted = !muted;
+  bgMusic.muted = muted;
+  updateVolUI();
+  SFX.click();
+});
 
-  function draw(ts) {
+btnVolUp.addEventListener('click', () => {
+  volume = Math.min(1, volume + 0.1);
+  bgMusic.volume = volume;
+  muted = false;
+  bgMusic.muted = false;
+  updateVolUI();
+  SFX.click();
+});
+
+btnVolDown.addEventListener('click', () => {
+  volume = Math.max(0, volume - 0.1);
+  bgMusic.volume = volume;
+  updateVolUI();
+  SFX.click();
+});
+
+/* ── THEME TOGGLE ── */
+let isDark = true;
+
+btnTheme.addEventListener('click', () => {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  iconMoon.style.display = isDark ? 'block' : 'none';
+  iconSun.style.display  = isDark ? 'none'  : 'block';
+  SFX.click();
+});
+
+/* ── AMBIENT CANVAS ── */
+const Ambient = (() => {
+  const ctx = ambientCanvas.getContext('2d');
+  let W, H, parts, raf, last = 0;
+  const DELAY = 1000/30;
+  const N = window.innerWidth < 500 ? 16 : 28;
+  function resize(){ W = ambientCanvas.width = window.innerWidth; H = ambientCanvas.height = window.innerHeight; }
+  function mk(){ return { x:Math.random()*(W||window.innerWidth), y:Math.random()*(H||window.innerHeight), r:Math.random()*1.5+0.3, a:Math.random()*Math.PI*2, s:Math.random()*0.15+0.04, o:Math.random()*0.35+0.05, do:(Math.random()-0.5)*0.005 }; }
+  function draw(ts){
     raf = requestAnimationFrame(draw);
-    if (ts - lastFrame < FDELAY) return;
-    lastFrame = ts;
-
-    ctx.clearRect(0, 0, W, H);
-
-    for (const p of particles) {
-      p.x += Math.cos(p.a) * p.s;
-      p.y += Math.sin(p.a) * p.s;
-      p.o  = Math.max(0.04, Math.min(0.45, p.o + p.do));
-      if (p.o <= 0.04 || p.o >= 0.45) p.do *= -1;
-      p.a += 0.005;  // slow angle drift
-
-      // Wrap around
-      if (p.x < 0) p.x = W;
-      if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H;
-      if (p.y > H) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(139, 26, 42, ${p.o})`;
-      ctx.fill();
+    if(ts - last < DELAY) return;
+    last = ts;
+    ctx.clearRect(0,0,W,H);
+    for(const p of parts){
+      p.x += Math.cos(p.a)*p.s; p.y += Math.sin(p.a)*p.s;
+      p.o = Math.max(0.04, Math.min(0.4, p.o+p.do));
+      if(p.o<=0.04||p.o>=0.4) p.do*=-1;
+      p.a += 0.004;
+      if(p.x<0) p.x=W; if(p.x>W) p.x=0;
+      if(p.y<0) p.y=H; if(p.y>H) p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(139,26,42,${p.o})`; ctx.fill();
     }
   }
-
   return {
-    start() { init(); raf = requestAnimationFrame(draw); },
-    stop()  { cancelAnimationFrame(raf); },
+    start(){ resize(); parts = Array.from({length:N},mk); window.addEventListener('resize',resize); raf = requestAnimationFrame(draw); },
   };
 })();
 
-/* ─────────────────────────────────────────────────────────────
-   CINEMATIC SEQUENCER
-───────────────────────────────────────────────────────────── */
-const Sequencer = (() => {
-
-  /* ── Phase 1: Hello ─────────────────────────────────────── */
-  async function phaseHello() {
-    await showStage(stageHello);
-    // Hello animation is CSS-driven (5s fade in→out)
-    // We wait for it to finish, then transition to cake
-    await wait(6200);
-    await hideStage(stageHello);
-  }
-
-  /* ── Phase 2: Cake ──────────────────────────────────────── */
-  async function phaseCake() {
-    await showStage(stageCake, 200);
-    // Trigger CSS animation on cake wrapper
-    await wait(100);
-    cakeWrapper.classList.add('animate-in');
-  }
-
-  /* ── Phase 3: Envelope ──────────────────────────────────── */
-  async function phaseEnvelope() {
-    hideStage(stageCake);
-    await wait(400);
-    await showStage(stageEnvelope);
-    await wait(200);
-    envelopeWrap.classList.add('animate-in');
-  }
-
-  /* ── Phase 4: Letter ────────────────────────────────────── */
-  async function phaseLetter() {
-    // Envelope "opening" animation
-    envelopeWrap.classList.add('opening');
+/* ── STAGE 1: INTRO TEXT SEQUENCE ── */
+async function phaseIntro(){
+  await showStage(stageIntro);
+  for(let i = 0; i < INTRO_LINES.length; i++){
+    introTextEl.style.opacity = '0';
+    introTextEl.style.transform = 'translateY(18px)';
+    introTextEl.style.transition = 'none';
+    introTextEl.textContent = INTRO_LINES[i];
+    await wait(80);
+    introTextEl.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    introTextEl.style.opacity = '1';
+    introTextEl.style.transform = 'translateY(0)';
+    SFX.reveal();
+    const hold = i === 2 ? 2200 : 1800;
+    await wait(hold);
+    introTextEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    introTextEl.style.opacity = '0';
+    introTextEl.style.transform = 'translateY(-12px)';
     await wait(600);
-    hideStage(stageEnvelope);
-    await wait(300);
-    showStage(stageLetter);
-
-    // Cascade letter elements in with staggered delays
-    await wait(600);
-    letterSalut.classList.add('reveal');
-
-    for (let i = 0; i < letterParas.length; i++) {
-      await wait(i === 0 ? 500 : 380);
-      letterParas[i].style.animationDelay = '0s';
-      letterParas[i].classList.add('reveal');
-    }
-
-    await wait(600);
-    letterSign.classList.add('reveal');
-    await wait(500);
-    arcadeBtn.classList.add('reveal');
   }
-
-  /* ── Phase 5: Arcade Hub ────────────────────────────────── */
-  async function phaseArcade() {
-    hideStage(stageLetter);
-    await wait(500);
-    showArcade();
-  }
-
-  /* ── Boot ───────────────────────────────────────────────── */
-  async function boot() {
-    AmbientCanvas.start();
-    await phaseHello();
-    await phaseCake();
-  }
-
-  return { boot, phaseEnvelope, phaseLetter, phaseArcade };
-})();
-
-/* ─────────────────────────────────────────────────────────────
-   ARCADE HUB
-───────────────────────────────────────────────────────────── */
-
-/** Tracks the currently loaded game module so we can clean up */
-let activeGameModule = null;
-
-function showArcade() {
-  sectionArcade.classList.add('active');
-  document.body.style.overflow = ''; // allow arcade to scroll
+  hideStage(stageIntro);
 }
 
-function openGame(gameKey) {
-  const meta = GAME_META[gameKey];
-  if (!meta) return;
+/* ── STAGE 2: CAKE BUILD ── */
+async function phaseCake(){
+  await showStage(stageCake, 200);
+  SFX.whoosh();
 
+  const parts = [
+    { id:'c-plate',  delay:0    },
+    { id:'c-bottom', delay:600  },
+    { id:'c-mid',    delay:1200 },
+    { id:'c-top',    delay:1800 },
+    { id:'c-deco',   delay:2400 },
+    { id:'c-candle', delay:3000 },
+  ];
+
+  for(const p of parts){
+    await wait(p.delay === 0 ? 0 : 600);
+    const el = document.getElementById(p.id);
+    if(el){
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+      el.style.transform  = 'translateY(-10px)';
+      el.style.opacity    = '0';
+      await wait(30);
+      el.style.opacity   = '1';
+      el.style.transform = 'translateY(0)';
+      if(p.id === 'c-candle') SFX.reveal();
+      else SFX.click();
+    }
+  }
+
+  await wait(800);
+
+  for(let i = 0; i < CAKE_LINES.length; i++){
+    cakeGreeting.textContent = CAKE_LINES[i];
+    cakeGreeting.classList.add('show');
+    await wait(1800);
+    cakeGreeting.classList.remove('show');
+    await wait(400);
+  }
+
+  await wait(200);
+  btnOpenGift.style.transition = 'opacity 0.8s ease';
+  btnOpenGift.style.opacity = '1';
+}
+
+/* ── STAGE 3: ENVELOPE ── */
+async function phaseEnvelope(){
+  SFX.whoosh();
+  hideStage(stageCake);
+  await wait(400);
+  await showStage(stageEnvelope);
+  envelopeWrap.classList.add('animate-in');
+}
+
+/* ── STAGE 4: LETTER ── */
+async function phaseLetter(){
+  SFX.seal();
+  envelopeWrap.classList.add('opening');
+  await wait(400);
+  SFX.paperRustle();
+  await wait(700);
+  hideStage(stageEnvelope);
+  await wait(300);
+  showStage(stageLetter);
+  await wait(700);
+  letterSalut.classList.add('reveal');
+  SFX.reveal();
+  for(let i = 0; i < letterParas.length; i++){
+    await wait(i === 0 ? 600 : 350);
+    letterParas[i].style.animationDelay = '0s';
+    letterParas[i].classList.add('reveal');
+  }
+  await wait(600);
+  letterSign.classList.add('reveal');
+  await wait(600);
+  arcadeBtn.classList.add('reveal');
+}
+
+/* ── STAGE 5: ARCADE ── */
+async function phaseArcade(){
+  SFX.arcade();
+  hideStage(stageLetter);
+  await wait(500);
+  sectionArcade.classList.add('active');
+}
+
+/* ── GAME OVERLAY ── */
+let activeGame = null;
+
+function openGame(key){
+  const meta = GAME_META[key];
+  if(!meta) return;
+  SFX.whoosh();
   gameOverTitle.textContent = meta.title;
-  gameMount.innerHTML = '';
-
-  // Show placeholder UI immediately
   gameMount.innerHTML = `
     <div class="game-placeholder">
-      <span class="game-placeholder-label">loading</span>
+      <span class="game-placeholder-label">coming soon</span>
       <p class="game-placeholder-title">${meta.title}</p>
-      <p class="game-placeholder-sub">Game module will be injected here.</p>
-    </div>
-  `;
-
-  gameOverlay.setAttribute('aria-hidden', 'false');
+      <p class="game-placeholder-sub">This game is being built. It's going to be worth it.</p>
+    </div>`;
+  gameOverlay.setAttribute('aria-hidden','false');
   gameOverlay.classList.add('active');
-
-  // Attempt to dynamically load game script
-  loadGameScript(meta.file, gameKey);
+  history.pushState({ gameOpen:true }, '');
 }
 
-function loadGameScript(src, gameKey) {
-  // Remove old script if present
-  const old = document.querySelector(`script[data-game="${gameKey}"]`);
-  if (old) old.remove();
-
-  const script = document.createElement('script');
-  script.src = src;
-  script.dataset.game = gameKey;
-  script.onload = () => {
-    // Each game script should expose window.GameRegistry[gameKey]
-    const registry = window.GameRegistry;
-    if (registry && registry[gameKey]) {
-      gameMount.innerHTML = '';
-      activeGameModule = registry[gameKey];
-      activeGameModule.mount(gameMount);
-    }
-  };
-  script.onerror = () => {
-    // Script not yet built — placeholder stays, no crash
-    const ph = gameMount.querySelector('.game-placeholder-label');
-    if (ph) ph.textContent = 'coming soon';
-  };
-  document.body.appendChild(script);
-}
-
-function closeGame() {
-  if (activeGameModule && typeof activeGameModule.destroy === 'function') {
-    activeGameModule.destroy();
-  }
-  activeGameModule = null;
+function closeGame(){
+  SFX.click();
+  if(activeGame && typeof activeGame.destroy === 'function') activeGame.destroy();
+  activeGame = null;
   gameOverlay.classList.remove('active');
-  gameOverlay.setAttribute('aria-hidden', 'true');
+  gameOverlay.setAttribute('aria-hidden','true');
   gameMount.innerHTML = '';
 }
 
-/* ─────────────────────────────────────────────────────────────
-   EVENT LISTENERS
-───────────────────────────────────────────────────────────── */
-
-/* Open Gift → Envelope */
+/* ── EVENT LISTENERS ── */
 btnOpenGift.addEventListener('click', () => {
-  Sequencer.phaseEnvelope();
+  SFX.click();
+  phaseEnvelope();
 });
 
-/* Envelope → Letter */
-function handleEnvelopeOpen() {
-  Sequencer.phaseLetter();
-}
-envelopeWrap.addEventListener('click',   handleEnvelopeOpen);
+envelopeWrap.addEventListener('click', () => phaseLetter());
 envelopeWrap.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    handleEnvelopeOpen();
-  }
+  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); phaseLetter(); }
 });
 
-/* Enter Arcade */
-btnEnterArcade.addEventListener('click', () => {
-  Sequencer.phaseArcade();
-});
+$('#btn-enter-arcade').addEventListener('click', () => phaseArcade());
 
-/* Game card clicks */
 document.addEventListener('click', e => {
-  const card = e.target.closest('.game-card[data-game]');
-  if (card) openGame(card.dataset.game);
+  const c = e.target.closest('.game-card[data-game]');
+  if(c) openGame(c.dataset.game);
 });
 
-/* Game card keyboard */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    const card = e.target.closest('.game-card[data-game]');
-    if (card) {
-      e.preventDefault();
-      openGame(card.dataset.game);
-    }
+  if(e.key==='Enter'||e.key===' '){
+    const c = e.target.closest('.game-card[data-game]');
+    if(c){ e.preventDefault(); openGame(c.dataset.game); }
   }
 });
 
-/* Back to arcade */
-btnBackArcade.addEventListener('click', closeGame);
-
-/* Hardware back / swipe back on mobile (popstate) */
+btnBack.addEventListener('click', closeGame);
 window.addEventListener('popstate', () => {
-  if (gameOverlay.classList.contains('active')) closeGame();
+  if(gameOverlay.classList.contains('active')) closeGame();
 });
 
-/* Push a state so back button closes overlay instead of navigating away */
-document.addEventListener('click', e => {
-  if (e.target.closest('.game-card[data-game]')) {
-    history.pushState({ gameOpen: true }, '');
-  }
-});
-
-/* ─────────────────────────────────────────────────────────────
-   BOOT
-───────────────────────────────────────────────────────────── */
-window.addEventListener('DOMContentLoaded', () => {
-  // Expose a global registry for game modules to hook into
+/* ── BOOT ── */
+window.addEventListener('DOMContentLoaded', async () => {
   window.GameRegistry = window.GameRegistry || {};
-
-  // Kick off the cinematic sequence
-  Sequencer.boot();
+  Ambient.start();
+  initMusic();
+  tryPlayMusic();
+  await phaseIntro();
+  await phaseCake();
 });
+JSEOF
