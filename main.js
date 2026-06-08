@@ -1,13 +1,10 @@
-cat > main.js << 'JSEOF'
 'use strict';
 
-/* ── MUSIC SOURCES (royalty-free CDN) ── */
 const MUSIC_TRACKS = [
   'https://cdn.pixabay.com/audio/2023/10/09/audio_f4c6f5d3e6.mp3',
   'https://cdn.pixabay.com/audio/2022/10/25/audio_946ff838d6.mp3',
 ];
 
-/* ── INTRO LINES ── */
 const INTRO_LINES = [
   'Yoo Nigga',
   "Just like I said, I've decided to add 'H' to Omosile",
@@ -17,14 +14,12 @@ const INTRO_LINES = [
   'I made something for you',
 ];
 
-/* ── CAKE GREETING LINES ── */
 const CAKE_LINES = [
   'Happy Birthday Omoshile',
   'Nineteen never looked this good',
   'This one is all for you ♥',
 ];
 
-/* ── GAME META ── */
 const GAME_META = {
   snake:        { title:'Snake' },
   runner:       { title:'Endless Runner' },
@@ -35,7 +30,6 @@ const GAME_META = {
   flappy:       { title:'Flappy Style' },
 };
 
-/* ── DOM ── */
 const $  = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 
@@ -68,7 +62,6 @@ const btnTheme      = $('#btn-theme');
 const iconMoon      = $('#icon-moon');
 const iconSun       = $('#icon-sun');
 
-/* ── HELPERS ── */
 function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
 
 function showStage(el, delay = 0){
@@ -81,9 +74,7 @@ function hideStage(el){
   el.classList.remove('active');
 }
 
-/* ── SOUND FX (Web Audio API — no files needed) ── */
 let audioCtx = null;
-
 function getAudioCtx(){
   if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
@@ -91,8 +82,8 @@ function getAudioCtx(){
 
 function playTone(freq, type, duration, vol = 0.15){
   try {
-    const ctx = getAudioCtx();
-    const osc = ctx.createOscillator();
+    const ctx  = getAudioCtx();
+    const osc  = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.connect(gain);
     gain.connect(ctx.destination);
@@ -106,70 +97,51 @@ function playTone(freq, type, duration, vol = 0.15){
 }
 
 const SFX = {
-  click()    { playTone(520, 'sine', 0.12, 0.1); },
-  whoosh()   { playTone(200, 'sawtooth', 0.3, 0.08); setTimeout(() => playTone(400,'sine',0.2,0.06), 100); },
-  reveal()   { playTone(660, 'sine', 0.25, 0.07); },
-  seal()     { playTone(300, 'triangle', 0.4, 0.12); setTimeout(() => playTone(180,'triangle',0.3,0.1),150); },
-  paperRustle(){ playTone(800,'sawtooth',0.15,0.04); setTimeout(()=>playTone(600,'sawtooth',0.12,0.04),80); },
-  arcade()   {
-    [523,659,784,1047].forEach((f,i) => setTimeout(() => playTone(f,'square',0.18,0.08), i*80));
-  },
+  click()     { playTone(520,'sine',0.12,0.1); },
+  whoosh()    { playTone(200,'sawtooth',0.3,0.08); setTimeout(()=>playTone(400,'sine',0.2,0.06),100); },
+  reveal()    { playTone(660,'sine',0.25,0.07); },
+  seal()      { playTone(300,'triangle',0.4,0.12); setTimeout(()=>playTone(180,'triangle',0.3,0.1),150); },
+  paper()     { playTone(800,'sawtooth',0.15,0.04); setTimeout(()=>playTone(600,'sawtooth',0.12,0.04),80); },
+  arcade()    { [523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,'square',0.18,0.08),i*80)); },
 };
 
-/* ── MUSIC PLAYER ── */
 let volume = 0.8;
 let muted  = false;
 
 function initMusic(){
-  bgMusic.src = MUSIC_TRACKS[0];
+  bgMusic.src    = MUSIC_TRACKS[0];
   bgMusic.volume = volume;
-  bgMusic.loop = true;
+  bgMusic.loop   = true;
   bgMusic.onerror = () => { bgMusic.src = MUSIC_TRACKS[1]; bgMusic.play().catch(()=>{}); };
   updateVolUI();
 }
 
 function tryPlayMusic(){
-  if(bgMusic.paused){
-    bgMusic.play().catch(() => {
-      // Autoplay blocked — play on first tap
-      document.addEventListener('touchstart', () => bgMusic.play().catch(()=>{}), { once: true });
-      document.addEventListener('click', () => bgMusic.play().catch(()=>{}), { once: true });
-    });
-  }
+  bgMusic.play().catch(() => {
+    const play = () => { bgMusic.play().catch(()=>{}); };
+    document.addEventListener('touchstart', play, { once:true });
+    document.addEventListener('click',      play, { once:true });
+  });
 }
 
 function updateVolUI(){
-  volFill.style.width = (muted ? 0 : volume * 100) + '%';
-  iconSound.style.display = muted ? 'none' : 'block';
-  iconMute.style.display  = muted ? 'block' : 'none';
+  volFill.style.width      = (muted ? 0 : volume * 100) + '%';
+  iconSound.style.display  = muted ? 'none'  : 'block';
+  iconMute.style.display   = muted ? 'block' : 'none';
 }
 
 btnMute.addEventListener('click', () => {
-  muted = !muted;
-  bgMusic.muted = muted;
-  updateVolUI();
-  SFX.click();
+  muted = !muted; bgMusic.muted = muted; updateVolUI(); SFX.click();
 });
-
 btnVolUp.addEventListener('click', () => {
-  volume = Math.min(1, volume + 0.1);
-  bgMusic.volume = volume;
-  muted = false;
-  bgMusic.muted = false;
-  updateVolUI();
-  SFX.click();
+  volume = Math.min(1, volume + 0.1); bgMusic.volume = volume;
+  muted = false; bgMusic.muted = false; updateVolUI(); SFX.click();
 });
-
 btnVolDown.addEventListener('click', () => {
-  volume = Math.max(0, volume - 0.1);
-  bgMusic.volume = volume;
-  updateVolUI();
-  SFX.click();
+  volume = Math.max(0, volume - 0.1); bgMusic.volume = volume; updateVolUI(); SFX.click();
 });
 
-/* ── THEME TOGGLE ── */
 let isDark = true;
-
 btnTheme.addEventListener('click', () => {
   isDark = !isDark;
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
@@ -178,11 +150,10 @@ btnTheme.addEventListener('click', () => {
   SFX.click();
 });
 
-/* ── AMBIENT CANVAS ── */
 const Ambient = (() => {
   const ctx = ambientCanvas.getContext('2d');
   let W, H, parts, raf, last = 0;
-  const DELAY = 1000/30;
+  const DELAY = 1000 / 30;
   const N = window.innerWidth < 500 ? 16 : 28;
   function resize(){ W = ambientCanvas.width = window.innerWidth; H = ambientCanvas.height = window.innerHeight; }
   function mk(){ return { x:Math.random()*(W||window.innerWidth), y:Math.random()*(H||window.innerHeight), r:Math.random()*1.5+0.3, a:Math.random()*Math.PI*2, s:Math.random()*0.15+0.04, o:Math.random()*0.35+0.05, do:(Math.random()-0.5)*0.005 }; }
@@ -193,74 +164,59 @@ const Ambient = (() => {
     ctx.clearRect(0,0,W,H);
     for(const p of parts){
       p.x += Math.cos(p.a)*p.s; p.y += Math.sin(p.a)*p.s;
-      p.o = Math.max(0.04, Math.min(0.4, p.o+p.do));
-      if(p.o<=0.04||p.o>=0.4) p.do*=-1;
+      p.o  = Math.max(0.04, Math.min(0.4, p.o+p.do));
+      if(p.o<=0.04||p.o>=0.4) p.do *= -1;
       p.a += 0.004;
       if(p.x<0) p.x=W; if(p.x>W) p.x=0;
       if(p.y<0) p.y=H; if(p.y>H) p.y=0;
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(139,26,42,${p.o})`; ctx.fill();
+      ctx.fillStyle = `rgba(139,26,42,${p.o})`; ctx.fill();
     }
   }
   return {
-    start(){ resize(); parts = Array.from({length:N},mk); window.addEventListener('resize',resize); raf = requestAnimationFrame(draw); },
+    start(){ resize(); parts = Array.from({length:N},mk); window.addEventListener('resize',resize); raf = requestAnimationFrame(draw); }
   };
 })();
 
-/* ── STAGE 1: INTRO TEXT SEQUENCE ── */
 async function phaseIntro(){
   await showStage(stageIntro);
   for(let i = 0; i < INTRO_LINES.length; i++){
-    introTextEl.style.opacity = '0';
+    introTextEl.style.opacity   = '0';
     introTextEl.style.transform = 'translateY(18px)';
-    introTextEl.style.transition = 'none';
-    introTextEl.textContent = INTRO_LINES[i];
+    introTextEl.style.transition= 'none';
+    introTextEl.textContent     = INTRO_LINES[i];
     await wait(80);
     introTextEl.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    introTextEl.style.opacity = '1';
-    introTextEl.style.transform = 'translateY(0)';
+    introTextEl.style.opacity    = '1';
+    introTextEl.style.transform  = 'translateY(0)';
     SFX.reveal();
-    const hold = i === 2 ? 2200 : 1800;
-    await wait(hold);
+    await wait(i === 2 ? 2200 : 1800);
     introTextEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    introTextEl.style.opacity = '0';
-    introTextEl.style.transform = 'translateY(-12px)';
+    introTextEl.style.opacity    = '0';
+    introTextEl.style.transform  = 'translateY(-12px)';
     await wait(600);
   }
   hideStage(stageIntro);
 }
 
-/* ── STAGE 2: CAKE BUILD ── */
 async function phaseCake(){
   await showStage(stageCake, 200);
   SFX.whoosh();
-
-  const parts = [
-    { id:'c-plate',  delay:0    },
-    { id:'c-bottom', delay:600  },
-    { id:'c-mid',    delay:1200 },
-    { id:'c-top',    delay:1800 },
-    { id:'c-deco',   delay:2400 },
-    { id:'c-candle', delay:3000 },
-  ];
-
-  for(const p of parts){
-    await wait(p.delay === 0 ? 0 : 600);
-    const el = document.getElementById(p.id);
+  const parts = ['c-plate','c-bottom','c-mid','c-top','c-deco','c-candle'];
+  for(let i = 0; i < parts.length; i++){
+    await wait(i === 0 ? 100 : 600);
+    const el = document.getElementById(parts[i]);
     if(el){
       el.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1)';
       el.style.transform  = 'translateY(-10px)';
       el.style.opacity    = '0';
       await wait(30);
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-      if(p.id === 'c-candle') SFX.reveal();
-      else SFX.click();
+      el.style.opacity    = '1';
+      el.style.transform  = 'translateY(0)';
+      parts[i] === 'c-candle' ? SFX.reveal() : SFX.click();
     }
   }
-
   await wait(800);
-
   for(let i = 0; i < CAKE_LINES.length; i++){
     cakeGreeting.textContent = CAKE_LINES[i];
     cakeGreeting.classList.add('show');
@@ -268,13 +224,11 @@ async function phaseCake(){
     cakeGreeting.classList.remove('show');
     await wait(400);
   }
-
   await wait(200);
   btnOpenGift.style.transition = 'opacity 0.8s ease';
-  btnOpenGift.style.opacity = '1';
+  btnOpenGift.style.opacity    = '1';
 }
 
-/* ── STAGE 3: ENVELOPE ── */
 async function phaseEnvelope(){
   SFX.whoosh();
   hideStage(stageCake);
@@ -283,12 +237,11 @@ async function phaseEnvelope(){
   envelopeWrap.classList.add('animate-in');
 }
 
-/* ── STAGE 4: LETTER ── */
 async function phaseLetter(){
   SFX.seal();
   envelopeWrap.classList.add('opening');
   await wait(400);
-  SFX.paperRustle();
+  SFX.paper();
   await wait(700);
   hideStage(stageEnvelope);
   await wait(300);
@@ -307,7 +260,6 @@ async function phaseLetter(){
   arcadeBtn.classList.add('reveal');
 }
 
-/* ── STAGE 5: ARCADE ── */
 async function phaseArcade(){
   SFX.arcade();
   hideStage(stageLetter);
@@ -315,7 +267,6 @@ async function phaseArcade(){
   sectionArcade.classList.add('active');
 }
 
-/* ── GAME OVERLAY ── */
 let activeGame = null;
 
 function openGame(key){
@@ -343,37 +294,27 @@ function closeGame(){
   gameMount.innerHTML = '';
 }
 
-/* ── EVENT LISTENERS ── */
-btnOpenGift.addEventListener('click', () => {
-  SFX.click();
-  phaseEnvelope();
-});
-
+btnOpenGift.addEventListener('click', () => { SFX.click(); phaseEnvelope(); });
 envelopeWrap.addEventListener('click', () => phaseLetter());
 envelopeWrap.addEventListener('keydown', e => {
   if(e.key==='Enter'||e.key===' '){ e.preventDefault(); phaseLetter(); }
 });
-
 $('#btn-enter-arcade').addEventListener('click', () => phaseArcade());
-
 document.addEventListener('click', e => {
   const c = e.target.closest('.game-card[data-game]');
   if(c) openGame(c.dataset.game);
 });
-
 document.addEventListener('keydown', e => {
   if(e.key==='Enter'||e.key===' '){
     const c = e.target.closest('.game-card[data-game]');
     if(c){ e.preventDefault(); openGame(c.dataset.game); }
   }
 });
-
 btnBack.addEventListener('click', closeGame);
 window.addEventListener('popstate', () => {
   if(gameOverlay.classList.contains('active')) closeGame();
 });
 
-/* ── BOOT ── */
 window.addEventListener('DOMContentLoaded', async () => {
   window.GameRegistry = window.GameRegistry || {};
   Ambient.start();
@@ -382,4 +323,3 @@ window.addEventListener('DOMContentLoaded', async () => {
   await phaseIntro();
   await phaseCake();
 });
-JSEOF

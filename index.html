@@ -1,4 +1,3 @@
-cat > index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -13,7 +12,6 @@ cat > index.html << 'HTMLEOF'
 </head>
 <body>
 
-  <!-- MUSIC PLAYER -->
   <div id="music-bar" class="music-bar">
     <button id="btn-mute" class="music-btn" aria-label="Mute">
       <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
@@ -29,20 +27,17 @@ cat > index.html << 'HTMLEOF'
     <span class="music-label">♪ playing</span>
   </div>
 
-  <!-- THEME TOGGLE -->
   <button id="btn-theme" class="theme-btn" aria-label="Toggle theme">
     <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
 
-  <!-- STAGE 1: CINEMATIC TEXT -->
   <section id="stage-intro" class="stage active">
     <div class="stage-center">
       <div id="intro-text" class="intro-text"></div>
     </div>
   </section>
 
-  <!-- STAGE 2: CAKE -->
   <section id="stage-cake" class="stage">
     <div class="stage-center cake-center">
       <div class="cake-scene">
@@ -50,9 +45,7 @@ cat > index.html << 'HTMLEOF'
         <div class="cake-build-wrap">
           <div class="cake-svg-wrap">
             <svg id="cake-svg" class="cake-svg" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg">
-              <!-- PLATE -->
               <ellipse id="c-plate" class="cake-part" cx="100" cy="200" rx="85" ry="12" fill="#1a0a0f" opacity="0"/>
-              <!-- BOTTOM TIER -->
               <g id="c-bottom" class="cake-part" opacity="0">
                 <rect x="28" y="152" width="144" height="48" fill="#0c0407"/>
                 <ellipse cx="100" cy="152" rx="72" ry="14" fill="#180810"/>
@@ -62,7 +55,6 @@ cat > index.html << 'HTMLEOF'
                 <path d="M100 156 Q95 168 101 180" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
                 <ellipse cx="100" cy="168" rx="62" ry="8" fill="none" stroke="#6b1a2a" stroke-width="1" opacity="0.4"/>
               </g>
-              <!-- MID TIER -->
               <g id="c-mid" class="cake-part" opacity="0">
                 <rect x="46" y="108" width="108" height="44" fill="#120508"/>
                 <ellipse cx="100" cy="108" rx="54" ry="12" fill="#1e0a10"/>
@@ -70,7 +62,6 @@ cat > index.html << 'HTMLEOF'
                 <path d="M52 114 Q48 126 54 136" stroke="#8b1a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                 <path d="M148 116 Q152 128 146 138" stroke="#8b1a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
               </g>
-              <!-- TOP TIER -->
               <g id="c-top" class="cake-part" opacity="0">
                 <rect x="62" y="74" width="76" height="34" fill="#1a0a0f"/>
                 <ellipse cx="100" cy="74" rx="38" ry="10" fill="#2a0d14"/>
@@ -78,7 +69,6 @@ cat > index.html << 'HTMLEOF'
                 <path d="M67 78 Q63 88 68 96" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
                 <path d="M133 80 Q137 90 132 98" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
               </g>
-              <!-- DECORATIONS -->
               <g id="c-deco" class="cake-part" opacity="0">
                 <circle cx="55" cy="170" r="4" fill="#8b1a2a" opacity="0.7"/>
                 <circle cx="145" cy="170" r="4" fill="#8b1a2a" opacity="0.7"/>
@@ -87,7 +77,6 @@ cat > index.html << 'HTMLEOF'
                 <circle cx="128" cy="125" r="3" fill="#8b1a2a" opacity="0.6"/>
                 <path d="M75 90 Q100 82 125 90" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.5"/>
               </g>
-              <!-- CANDLE -->
               <g id="c-candle" class="cake-part" opacity="0">
                 <rect x="96" y="42" width="8" height="32" rx="2" fill="#6b1a2a"/>
                 <ellipse class="flame flame-1" cx="100" cy="38" rx="5" ry="8" fill="#ff6b35" opacity="0.9"/>
@@ -104,7 +93,6 @@ cat > index.html << 'HTMLEOF'
     </div>
   </section>
 
-  <!-- STAGE 3: ENVELOPE -->
   <section id="stage-envelope" class="stage">
     <div class="stage-center">
       <div id="envelope-wrap" class="envelope-wrap" role="button" tabindex="0" aria-label="Open envelope">
@@ -127,7 +115,6 @@ cat > index.html << 'HTMLEOF'
     </div>
   </section>
 
-  <!-- STAGE 4: LETTER -->
   <section id="stage-letter" class="stage">
     <div class="letter-container">
       <div class="paper-sheet">
@@ -162,7 +149,6 @@ cat > index.html << 'HTMLEOF'
     </div>
   </section>
 
-  <!-- SECTION 2: ARCADE -->
   <section id="section-arcade" class="arcade-section">
     <header class="arcade-header">
       <div class="arcade-header-inner">
@@ -237,11 +223,7 @@ cat > index.html << 'HTMLEOF'
         </div><div class="card-glow"></div>
       </article>
     </div>
-
-    <footer class="site-footer">
-      <p>© starykingTBL</p>
-    </footer>
-
+    <footer class="site-footer"><p>© starykingTBL</p></footer>
     <div id="game-overlay" class="game-overlay" aria-hidden="true">
       <div class="game-overlay-header">
         <button id="btn-back-arcade" class="back-btn">
@@ -260,4 +242,3 @@ cat > index.html << 'HTMLEOF'
   <script src="main.js"></script>
 </body>
 </html>
-HTMLEOF
