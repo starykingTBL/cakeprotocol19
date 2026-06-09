@@ -12,38 +12,55 @@
 </head>
 <body>
 
+  <!-- MUSIC BAR -->
   <div id="music-bar" class="music-bar">
-    <button id="btn-mute" class="music-btn" aria-label="Mute">
-      <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-      <svg id="icon-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-    </button>
-    <button id="btn-vol-down" class="music-btn" aria-label="Volume down">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </button>
-    <div class="vol-track"><div id="vol-fill" class="vol-fill"></div></div>
-    <button id="btn-vol-up" class="music-btn" aria-label="Volume up">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </button>
-    <span class="music-label">♪ ambient</span>
+    <div class="vol-group">
+      <span class="vol-group-label">♪</span>
+      <button id="btn-mute" class="music-btn" aria-label="Mute music">
+        <svg id="icon-sound" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <svg id="icon-mute" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      </button>
+      <button id="btn-vol-down" class="music-btn" aria-label="Music volume down">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="vol-track"><div id="vol-fill" class="vol-fill"></div></div>
+      <button id="btn-vol-up" class="music-btn" aria-label="Music volume up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+    <div class="vol-divider"></div>
+    <div class="vol-group">
+      <span class="vol-group-label">🔊</span>
+      <button id="btn-sfx-down" class="music-btn" aria-label="SFX volume down">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="vol-track"><div id="sfx-fill" class="vol-fill sfx-fill"></div></div>
+      <button id="btn-sfx-up" class="music-btn" aria-label="SFX volume up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
   </div>
 
+  <!-- THEME TOGGLE -->
   <button id="btn-theme" class="theme-btn" aria-label="Toggle theme">
     <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
 
+  <!-- STAGE 1: INTRO -->
   <section id="stage-intro" class="stage active">
     <div class="stage-center">
       <div id="intro-text" class="intro-text"></div>
     </div>
   </section>
 
+  <!-- STAGE 2: CAKE -->
   <section id="stage-cake" class="stage">
     <div class="stage-center cake-center">
       <div class="cake-scene">
         <div id="cake-title" class="cake-title"></div>
         <div class="cake-svg-wrap">
-          <svg id="cake-svg" class="cake-svg" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg">
+          <svg class="cake-svg" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg">
             <ellipse id="c-plate" class="cake-part" cx="100" cy="200" rx="85" ry="12" fill="#1a0a0f" opacity="0"/>
             <g id="c-bottom" class="cake-part" opacity="0">
               <rect x="28" y="152" width="144" height="48" fill="#0c0407"/>
@@ -52,7 +69,6 @@
               <path d="M38 158 Q34 172 40 184" stroke="#8b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
               <path d="M162 160 Q166 174 160 186" stroke="#8b1a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
               <path d="M100 156 Q95 168 101 180" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <ellipse cx="100" cy="168" rx="62" ry="8" fill="none" stroke="#6b1a2a" stroke-width="1" opacity="0.4"/>
             </g>
             <g id="c-mid" class="cake-part" opacity="0">
               <rect x="46" y="108" width="108" height="44" fill="#120508"/>
@@ -65,16 +81,14 @@
               <rect x="62" y="74" width="76" height="34" fill="#1a0a0f"/>
               <ellipse cx="100" cy="74" rx="38" ry="10" fill="#2a0d14"/>
               <ellipse cx="100" cy="108" rx="38" ry="10" fill="#120508"/>
-              <path d="M67 78 Q63 88 68 96" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <path d="M133 80 Q137 90 132 98" stroke="#6b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
             </g>
             <g id="c-deco" class="cake-part" opacity="0">
-              <circle cx="55" cy="170" r="4" fill="#8b1a2a" opacity="0.7"/>
-              <circle cx="145" cy="170" r="4" fill="#8b1a2a" opacity="0.7"/>
-              <circle cx="100" cy="165" r="3" fill="#c9a96e" opacity="0.6"/>
-              <circle cx="72" cy="125" r="3" fill="#8b1a2a" opacity="0.6"/>
-              <circle cx="128" cy="125" r="3" fill="#8b1a2a" opacity="0.6"/>
-              <path d="M75 90 Q100 82 125 90" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <circle cx="55" cy="170" r="4" fill="#8b1a2a" opacity="0.8"/>
+              <circle cx="145" cy="170" r="4" fill="#8b1a2a" opacity="0.8"/>
+              <circle cx="100" cy="165" r="3" fill="#c9a96e" opacity="0.7"/>
+              <circle cx="72" cy="125" r="3" fill="#8b1a2a" opacity="0.7"/>
+              <circle cx="128" cy="125" r="3" fill="#8b1a2a" opacity="0.7"/>
+              <path d="M75 90 Q100 82 125 90" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.6"/>
             </g>
             <g id="c-candle" class="cake-part" opacity="0">
               <rect x="96" y="42" width="8" height="32" rx="2" fill="#6b1a2a"/>
@@ -94,6 +108,7 @@
     </div>
   </section>
 
+  <!-- STAGE 3: ENVELOPE -->
   <section id="stage-envelope" class="stage">
     <div class="stage-center">
       <div id="envelope-wrap" class="envelope-wrap" role="button" tabindex="0">
@@ -102,10 +117,7 @@
             <div class="env-flap-back"></div>
             <div class="env-pocket"></div>
             <div class="env-seal">
-              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="18" fill="#6b1a2a"/>
-                <text x="20" y="26" text-anchor="middle" font-size="18" fill="#c9a96e" font-family="Georgia,serif">♥</text>
-              </svg>
+              <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#6b1a2a"/><text x="20" y="26" text-anchor="middle" font-size="18" fill="#c9a96e" font-family="Georgia,serif">♥</text></svg>
             </div>
             <div class="env-flap-front"></div>
             <div class="env-letter-peek"></div>
@@ -116,6 +128,7 @@
     </div>
   </section>
 
+  <!-- STAGE 4: LETTER -->
   <section id="stage-letter" class="stage">
     <div class="letter-container">
       <div class="paper-sheet">
@@ -148,6 +161,7 @@
     </div>
   </section>
 
+  <!-- ARCADE -->
   <section id="section-arcade" class="arcade-section">
     <header class="arcade-header">
       <div class="arcade-header-inner">
@@ -164,69 +178,13 @@
 
     <div id="tab-games" class="tab-panel active">
       <div class="game-grid" role="list">
-        <article class="game-card" data-game="snake" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">01</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M8 24 Q8 8 24 8 Q40 8 40 24 Q40 36 28 36 Q20 36 20 28 Q20 20 28 20" stroke="#8b1a2a" stroke-width="3.5" stroke-linecap="round" fill="none"/><circle cx="40" cy="24" r="3" fill="#8b1a2a"/></svg></div>
-            <h3 class="card-title">Snake</h3>
-            <p class="card-desc">Wrap-around walls. Custom skins &amp; food.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="runner" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">02</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="30" cy="10" r="4" stroke="#8b1a2a" stroke-width="2.5"/><path d="M30 14 L26 24 L18 28 M30 14 L34 24 L38 34 M26 24 L22 34" stroke="#8b1a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3 class="card-title">Endless Runner</h3>
-            <p class="card-desc">Parallax world. Particles. Mobile-optimized.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="brickbreaker" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">03</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/><rect x="24" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="14" y="19" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/><circle cx="24" cy="34" r="3" fill="#8b1a2a"/><rect x="12" y="40" width="20" height="4" rx="2" stroke="#8b1a2a" stroke-width="2"/></svg></div>
-            <h3 class="card-title">Brick Breaker</h3>
-            <p class="card-desc">Multi-level. Tough &amp; unbreakable bricks.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="taptarget" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">04</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#8b1a2a" stroke-width="2"/><circle cx="24" cy="24" r="9" stroke="#8b1a2a" stroke-width="2" opacity=".6"/><circle cx="24" cy="24" r="3" fill="#8b1a2a"/><line x1="24" y1="4" x2="24" y2="10" stroke="#8b1a2a" stroke-width="2"/><line x1="24" y1="38" x2="24" y2="44" stroke="#8b1a2a" stroke-width="2"/><line x1="4" y1="24" x2="10" y2="24" stroke="#8b1a2a" stroke-width="2"/><line x1="38" y1="24" x2="44" y2="24" stroke="#8b1a2a" stroke-width="2"/></svg></div>
-            <h3 class="card-title">Tap Target</h3>
-            <p class="card-desc">Speed &amp; accuracy. Targets vanish fast.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="2048" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">05</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="26" y="26" width="16" height="16" rx="3" fill="#6b1a2a" stroke="#8b1a2a" stroke-width="2"/></svg></div>
-            <h3 class="card-title">2048</h3>
-            <p class="card-desc">Sliding tiles in our dark aesthetic.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="memory" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">06</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/></svg></div>
-            <h3 class="card-title">Memory Match</h3>
-            <p class="card-desc">Timed card-flipping. Beat the clock.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
-        <article class="game-card" data-game="flappy" role="listitem" tabindex="0">
-          <div class="card-inner">
-            <div class="card-number">07</div>
-            <div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M8 24 Q16 14 24 24 Q32 34 40 24" stroke="#8b1a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="24" cy="24" rx="5" ry="4" fill="#6b1a2a"/><path d="M24 20 Q30 14 36 18" stroke="#8b1a2a" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
-            <h3 class="card-title">Flappy Style</h3>
-            <p class="card-desc">Tap to fly. Tight physics. Brutal gaps.</p>
-            <div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div>
-          </div><div class="card-glow"></div>
-        </article>
+        <article class="game-card" data-game="snake" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">01</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M8 24 Q8 8 24 8 Q40 8 40 24 Q40 36 28 36 Q20 36 20 28 Q20 20 28 20" stroke="#8b1a2a" stroke-width="3.5" stroke-linecap="round"/><circle cx="40" cy="24" r="3" fill="#8b1a2a"/></svg></div><h3 class="card-title">Snake</h3><p class="card-desc">Wrap-around walls. Custom skins &amp; food.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="runner" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">02</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="30" cy="10" r="4" stroke="#8b1a2a" stroke-width="2.5"/><path d="M30 14 L26 24 L18 28 M30 14 L34 24 L38 34 M26 24 L22 34" stroke="#8b1a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3 class="card-title">Endless Runner</h3><p class="card-desc">Parallax world. Particles. Mobile-optimized.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="brickbreaker" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">03</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/><rect x="24" y="8" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="14" y="19" width="14" height="7" rx="2" stroke="#8b1a2a" stroke-width="2"/><circle cx="24" cy="34" r="3" fill="#8b1a2a"/><rect x="12" y="40" width="20" height="4" rx="2" stroke="#8b1a2a" stroke-width="2"/></svg></div><h3 class="card-title">Brick Breaker</h3><p class="card-desc">Multi-level. Tough &amp; unbreakable bricks.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="taptarget" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">04</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#8b1a2a" stroke-width="2"/><circle cx="24" cy="24" r="9" stroke="#8b1a2a" stroke-width="2" opacity=".6"/><circle cx="24" cy="24" r="3" fill="#8b1a2a"/><line x1="24" y1="4" x2="24" y2="10" stroke="#8b1a2a" stroke-width="2"/><line x1="24" y1="38" x2="24" y2="44" stroke="#8b1a2a" stroke-width="2"/><line x1="4" y1="24" x2="10" y2="24" stroke="#8b1a2a" stroke-width="2"/><line x1="38" y1="24" x2="44" y2="24" stroke="#8b1a2a" stroke-width="2"/></svg></div><h3 class="card-title">Tap Target</h3><p class="card-desc">Speed &amp; accuracy. Targets vanish fast.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="2048" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">05</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2" opacity=".5"/><rect x="26" y="26" width="16" height="16" rx="3" fill="#6b1a2a" stroke="#8b1a2a" stroke-width="2"/></svg></div><h3 class="card-title">2048</h3><p class="card-desc">Sliding tiles in our dark aesthetic.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="memory" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">06</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="6" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="6" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/><rect x="26" y="26" width="16" height="16" rx="3" stroke="#8b1a2a" stroke-width="2"/></svg></div><h3 class="card-title">Memory Match</h3><p class="card-desc">Timed card-flipping. Beat the clock.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
+        <article class="game-card" data-game="flappy" role="listitem" tabindex="0"><div class="card-inner"><div class="card-number">07</div><div class="card-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M8 24 Q16 14 24 24 Q32 34 40 24" stroke="#8b1a2a" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="24" cy="24" rx="5" ry="4" fill="#6b1a2a"/></svg></div><h3 class="card-title">Flappy Style</h3><p class="card-desc">Tap to fly. Tight physics. Brutal gaps.</p><div class="card-cta"><span>Play</span><span class="card-arrow">→</span></div></div><div class="card-glow"></div></article>
       </div>
     </div>
 
@@ -284,5 +242,12 @@
   <audio id="bg-music" loop preload="auto"></audio>
   <audio id="vn-audio" preload="auto"></audio>
   <script src="main.js"></script>
+  <script src="games/snake.js"></script>
+  <script src="games/runner.js"></script>
+  <script src="games/brickbreaker.js"></script>
+  <script src="games/taptarget.js"></script>
+  <script src="games/game2048.js"></script>
+  <script src="games/memory.js"></script>
+  <script src="games/flappy.js"></script>
 </body>
 </html>
